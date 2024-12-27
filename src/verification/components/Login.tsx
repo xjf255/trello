@@ -1,4 +1,6 @@
 import { useRef } from "react"
+import { PATHS } from "../../utils/constant"
+import { redirect } from "react-router"
 
 export const Login = () => {
   const formRef = useRef(null)
@@ -29,6 +31,7 @@ export const Login = () => {
       })
       .then((data) => {
         console.log('Login successful:', data)
+        redirect(PATHS.dashboard)
       })
       .catch((error) => {
         console.error('There was a problem with the login request:', error)

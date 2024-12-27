@@ -3,38 +3,43 @@ import { useRef } from "react"
 export const SignUp = () => {
   const formRef = useRef(null)
 
-  function handleSubmit(event: React.MouseEvent) {
-    event.preventDefault()
-    if (!formRef.current) return
+  async function handleSubmit(event: React.MouseEvent) {
+    event.preventDefault();
 
-    const formData = new FormData(formRef.current)
-    const user = formData.get('user')
-    const password = formData.get('password')
-    const email = formData.get('email')
+    if (!formRef.current) return;
 
-    if (!password || !user) return
+    const formData = new FormData(formRef.current);
+    const user = formData.get('user')?.toString();
+    const password = formData.get('password')?.toString();
+    const email = formData.get('email')?.toString();
 
-    fetch('http://localhost:1234/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: "include",
-      body: JSON.stringify({ user, email, password })
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.json())
-        }
-        return response.json()
-      })
-      .then((data) => {
-        console.log('Login successful:', data)
-      })
-      .catch((error) => {
-        console.error('There was a problem with the login request:', error)
-      })
+    if (!user || !password) {
+      console.error("Usuario y contraseña son obligatorios");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:1234/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ user, email, password })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error: ${errorData.message || 'Unknown error'}`);
+      }
+
+      const data = await response.json();
+      console.log('Usuario creado con éxito:', data);
+    } catch (error) {
+      console.error('Hubo un problema con la solicitud:', error);
+    }
   }
+
 
   return (
     <form ref={formRef}>
