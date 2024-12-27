@@ -1,10 +1,11 @@
-import { Verification } from "../verification/Verification"
+import { NavLink } from "react-router";
+import { PATHS } from "../utils/constant";
 
-export const Home = () => {
+export default function Home() {
   return (
     <>
       <h1>Trello</h1>
-      <Verification />
+      <NavLink to={PATHS.verification}>Sign In</NavLink>
     </>
   )
 }
