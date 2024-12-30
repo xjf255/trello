@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux"
-import { addRepositories, createNewUser, updateStateUser } from "../store/users/slice";
+import { setUser } from "../context/user/slice"
+import { IUserStore } from "../types"
 
 export const useUserActions = () => {
   const dispatch = useDispatch()
 
-  const addUser = ({ newUser }) => {
-    dispatch(createNewUser(newUser))
+  const addUser = (newUser: IUserStore) => {
+    dispatch(setUser(newUser))
   }
 
   return { addUser }

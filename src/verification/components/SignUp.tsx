@@ -1,7 +1,10 @@
 import { useRef } from "react"
+import { useNavigate } from "react-router";
+import { PATHS } from "../../utils/constant";
 
 export const SignUp = () => {
   const formRef = useRef(null)
+  const navigate = useNavigate()
 
   async function handleSubmit(event: React.MouseEvent) {
     event.preventDefault();
@@ -33,8 +36,8 @@ export const SignUp = () => {
         throw new Error(`Error: ${errorData.message || 'Unknown error'}`);
       }
 
-      const data = await response.json();
-      console.log('Usuario creado con éxito:', data);
+      // const data = await response.json();
+      navigate(PATHS.dashboard)
     } catch (error) {
       console.error('Hubo un problema con la solicitud:', error);
     }

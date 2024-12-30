@@ -1,9 +1,10 @@
 import { useRef } from "react"
 import { PATHS } from "../../utils/constant"
-import { redirect } from "react-router"
+import { useNavigate } from "react-router"
 
 export const Login = () => {
   const formRef = useRef(null)
+  const navigate = useNavigate()
 
   function handleSubmit(event: React.MouseEvent) {
     event.preventDefault()
@@ -15,7 +16,7 @@ export const Login = () => {
 
     if (!password || !user) return
 
-    fetch('http://localhost:1234/login', {
+    fetch('http://localhost:1234/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +32,7 @@ export const Login = () => {
       })
       .then((data) => {
         console.log('Login successful:', data)
-        redirect(PATHS.dashboard)
+        navigate(PATHS.dashboard)
       })
       .catch((error) => {
         console.error('There was a problem with the login request:', error)
