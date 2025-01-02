@@ -1,10 +1,40 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router";
 import { PATHS } from "../../utils/constant";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { IUserSignUp } from "../../types";
 
 export const SignUp = () => {
   const formRef = useRef(null)
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
+
+  const createUser = async ({ user, password, email }: IUserSignUp) => {
+    const response = await fetch('http://localhost:1234/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: "include",
+      body: JSON.stringify({ user, password, email })
+    })
+    return response.json()
+  }
+
+  const mutationUser = useMutation({
+    mutationFn: ({ password, user, email }: IUserSignUp) => createUser({ password, user, email }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] })
+      navigate(PATHS.dashboard)
+    },
+    onError: () => {
+      queryClient.setQueryData(['user'], undefined)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    }
+  })
+
 
   async function handleSubmit(event: React.MouseEvent) {
     event.preventDefault();
@@ -16,31 +46,12 @@ export const SignUp = () => {
     const password = formData.get('password')?.toString();
     const email = formData.get('email')?.toString();
 
-    if (!user || !password) {
-      console.error("Usuario y contraseña son obligatorios");
+    if (!user || !password || !email) {
+      console.error("Todos los campos son obligatorios");
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:1234/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ user, email, password })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Error: ${errorData.message || 'Unknown error'}`);
-      }
-
-      // const data = await response.json();
-      navigate(PATHS.dashboard)
-    } catch (error) {
-      console.error('Hubo un problema con la solicitud:', error);
-    }
+    mutationUser.mutate({ user, password, email });
   }
 
 

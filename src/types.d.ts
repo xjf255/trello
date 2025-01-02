@@ -1,10 +1,18 @@
-export interface IUserStore {
-  createdAt: Date
+export interface IUsers {
+  id: string
+  user: string
   email: string
+  createdAt: Date
+  updatedAt: Date
+  isActive: boolean
+  password?: string
+}
+
+export interface IUserStore extends IUsers {
   exp?: number
   iat?: number
-  id: string
-  isActive: boolean
-  updatedAt: Date
-  user: string
 }
+
+export type IUser = Pick<IUsers, 'user' | 'password'>
+export type IUserSignUp = Pick<IUsers, 'user' | 'password' | 'email'>
+

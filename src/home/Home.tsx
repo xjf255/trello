@@ -4,8 +4,14 @@ import { PATHS } from "../utils/constant";
 export default function Home() {
   return (
     <>
-      <h1>Trello</h1>
-      <NavLink to={PATHS.verification.default}>Login</NavLink>
+      <header>
+        <h1>Trello</h1>
+        <span>
+          <NavLink to={PATHS.verification.signup}>Sign up</NavLink>
+          <NavLink to={PATHS.verification.login}>Login</NavLink>
+        </span>
+      </header>
+      <main />
       <Outlet />
     </>
   )
