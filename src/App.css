@@ -32,6 +32,11 @@ body {
   }
 }
 
+span{
+  display: flex;
+  gap: 40px;
+}
+
 main {
   width: 100vw;
   height: 100dvh;
@@ -53,4 +58,8 @@ form {
   flex-direction: column;
   gap: 20px;
   align-items: center;
+}
+
+.isError{
+  color: rgb(242, 51, 51);
 }

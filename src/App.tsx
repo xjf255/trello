@@ -6,7 +6,6 @@ import { PATHS } from './utils/constant';
 import { Login } from './verification/components/Login';
 import { SignUp } from './verification/components/SignUp';
 import { useQuery } from '@tanstack/react-query';
-import { NotAuthorized } from './components/NotAuthorized';
 
 export default function App() {
   const Home = lazy(() => import('./home/Home'));
@@ -14,7 +13,7 @@ export default function App() {
   const DashBoard = lazy(() => import('./dashBoard/DashBoard'));
   const NotFound = lazy(() => import('./pages/NotFound'));
 
-  const { data: user, isLoading, isError } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
       const response = await fetch('http://localhost:1234/users/protected', { credentials: 'include' });
@@ -29,7 +28,6 @@ export default function App() {
   const isAuth = !!user;
   return (
     <>
-    {isError ?? <NotAuthorized />}
       <Suspense fallback={<h1>Cargando...</h1>}>
         {isLoading && <h1>Cargando...</h1>}
         <Routes>
