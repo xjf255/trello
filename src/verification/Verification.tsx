@@ -1,14 +1,17 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { PATHS } from "../utils/constant"
+import { useEffect } from "react"
 
 export default function Verification() {
+  const navigator = useNavigate()
+  useEffect(() => {
+    if (location.pathname === '/verification') {
+      navigator(PATHS.verification.login)
+    }
+  }, [location.pathname])
   return (
     <>
       <h1>Verification</h1>
-      <div className="auth__toggle">
-        <NavLink to={PATHS.verification.signup}>Sign Up</NavLink>
-        <NavLink to={PATHS.verification.login}>Login</NavLink>
-      </div>
       <Outlet />
     </>
   )

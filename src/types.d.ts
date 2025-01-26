@@ -13,6 +13,6 @@ export interface IUserStore extends IUsers {
   iat?: number
 }
 
-export type IUser = Pick<IUsers, 'user' | 'password'>
+export type IUser = Pick<IUsers, 'user' | 'password' >
 export type IUserSignUp = Pick<IUsers, 'user' | 'password' | 'email'>
 

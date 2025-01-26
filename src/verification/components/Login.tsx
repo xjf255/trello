@@ -5,9 +5,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { IUser } from "../../types"
 import { RequestError } from "../../utils/customErrors/requestErrors"
 import { ValidationError } from "../../utils/customErrors/validationErrors"
-import { validatedLoginUser } from "../../utils/schemas/validationUser"
-import { Show, Warning } from "../../components/Icons"
 import { Input } from "./Input"
+import { Toggle } from "./Toggle"
 
 interface IErrorsForm {
   message?: string
@@ -80,20 +79,24 @@ export const Login = () => {
   // }
 
   return (
-    <form ref={formRef}>
-      {/* <label>
+    <>
+      <Toggle />
+      <form ref={formRef}>
+        {/* <label>
         username:
         <div>
           <input type="text" name="user" placeholder="username or email" onChange={handleChangeInput} />
           <Warning /><Show/>
         </div>
       </label> */}
-      <Input name={'username'} placeholder={"username or email"} /> 
-      {errorsForm?.fields === 'user' && <p className="isError">{errorsForm.message}</p>}
-      <Input name="password" placeholder="password" isPassword />
-      {errorsForm?.fields === 'pass' && <p className="isError">{errorsForm.message}</p>}
-      <input type="button" value="Iniciar Sesion" onClick={(e) => handleSubmit(e)} />
-      {errorsForm?.fields === '*' && <p className="isError">{errorsForm.message}</p>}
-    </form>
+        <Input name={'username'} placeholder={"username or email"} />
+        {errorsForm?.fields === 'user' && <p className="isError">{errorsForm.message}</p>}
+        <Input name="password" placeholder="password" isPassword />
+        {errorsForm?.fields === 'pass' && <p className="isError">{errorsForm.message}</p>}
+        <input type="button" value="Iniciar Sesion" onClick={(e) => handleSubmit(e)} />
+        {errorsForm?.fields === '*' && <p className="isError">{errorsForm.message}</p>}
+      </form>
+      <a href={`http://localhost:5173${PATHS.verification.passwordReset}`}>forgot password?</a>
+    </>
   )
 }

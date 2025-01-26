@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { PATHS } from "../../utils/constant";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IUserSignUp } from "../../types";
+import { Toggle } from "./Toggle";
 
 export const SignUp = () => {
   const formRef = useRef(null)
@@ -56,20 +57,23 @@ export const SignUp = () => {
 
 
   return (
-    <form ref={formRef}>
-      <label>
-        username:
-        <input type="text" name="user" placeholder="user" />
-      </label>
-      <label>
-        email:
-        <input type="text" name="email" placeholder="email" />
-      </label>
-      <label>
-        password:
-        <input type="password" name="password" placeholder="password" />
-      </label>
-      <input type="button" value="Registrarse" onClick={handleSubmit} />
-    </form>
+    <>
+      <Toggle />
+      <form ref={formRef}>
+        <label>
+          username:
+          <input type="text" name="user" placeholder="user" />
+        </label>
+        <label>
+          email:
+          <input type="text" name="email" placeholder="email" />
+        </label>
+        <label>
+          password:
+          <input type="password" name="password" placeholder="password" />
+        </label>
+        <input type="button" value="Registrarse" onClick={handleSubmit} />
+      </form>
+    </>
   )
 }

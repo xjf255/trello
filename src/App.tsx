@@ -6,6 +6,8 @@ import { PATHS } from './utils/constant';
 import { Login } from './verification/components/Login';
 import { SignUp } from './verification/components/SignUp';
 import { useQuery } from '@tanstack/react-query';
+import FactorAuthentication from './verification/components/FactorAuthentication';
+import { ResetPassword } from './verification/components/ResetPassword';
 
 export default function App() {
   const Home = lazy(() => import('./home/Home'));
@@ -41,6 +43,8 @@ export default function App() {
           >
             <Route path={PATHS.verification.signup} element={<SignUp />} />
             <Route path={PATHS.verification.login} element={<Login />} />
+            <Route path={PATHS.verification.verification} element={<FactorAuthentication />} />
+            <Route path={PATHS.verification.passwordReset} element={<ResetPassword />} />
           </Route>
           <Route element={<ProtectedRoutes isAuthenticated={isAuth} />}>
             <Route path={PATHS.dashboard} element={<DashBoard />} />

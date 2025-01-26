@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Show, Warning } from "../../components/Icons"
-import { validatedLoginUser } from "../../utils/schemas/validationUser"
+import { validatedUser } from "../../utils/schemas/validationUser"
 
 interface InputProps {
   name: string,
@@ -14,7 +14,7 @@ export const Input = ({ name, placeholder, isPassword = false }: InputProps) => 
   function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
     const user = event.currentTarget.value
     if (user.trim() !== '') setIsEmpty(false)
-    const validateField = validatedLoginUser({ user })
+    const validateField = validatedUser({ user })
     if (!validateField.success) {
       const { message } = JSON.parse(validateField.error.message)[0]
       setError(message)
