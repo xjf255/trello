@@ -18,7 +18,7 @@ export default function App() {
   const { data: user, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const response = await fetch('http://localhost:1234/users/protected', { credentials: 'include' });
+      const response = await fetch('http://localhost:1234/verification/protected', { credentials: 'include' });
       if (!response.ok) {
         throw new Error('No autorizado');
       }

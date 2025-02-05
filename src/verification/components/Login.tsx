@@ -2,11 +2,12 @@ import { useRef, useState } from "react"
 import { PATHS } from "../../utils/constant"
 import { useNavigate } from "react-router"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { IUser } from "../../types"
 import { RequestError } from "../../utils/customErrors/requestErrors"
 import { ValidationError } from "../../utils/customErrors/validationErrors"
 import { Input } from "./Input"
 import { Toggle } from "./Toggle"
+import { IUser } from "../../types.ts"
+import { TypeOfInput } from "../../type.ts"
 
 interface IErrorsForm {
   message?: string
@@ -20,13 +21,16 @@ export const Login = () => {
   const queryClient = useQueryClient()
 
   const loginUser = async ({ user, password }: IUser) => {
-    const response = await fetch('http://localhost:1234/users/login', {
+    const response = await fetch('http://localhost:1234/verification/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       credentials: "include",
-      body: JSON.stringify({ user, password })
+      body: JSON.stringify({
+        [user.includes("@") ? "email" : "user"]: user,
+        password
+      })
     })
     if (!response.ok) throw new RequestError("try again later")
     return response.json()
@@ -54,7 +58,7 @@ export const Login = () => {
       const formData = new FormData(formRef.current)
       const user = formData.get('user')?.toString()
       const password = formData.get('password')?.toString()
-      const requiredFields = !user ? !password ? '*' : 'user' : 'pass'
+      const requiredFields = !user && !password ? '*' : !user ? 'user' : 'pass'
 
       if (!password || !user) throw new ValidationError("all fields are neccesary", requiredFields);
       setErrorsForm({})
@@ -69,29 +73,13 @@ export const Login = () => {
     }
   }
 
-  // function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
-  //   const user = event.currentTarget.value
-  //   const validateField = validatedLoginUser({ user })
-  //   if (!validateField.success) {
-  //     const { path, message } = JSON.parse(validateField.error.message)[0]
-  //     setErrorsForm({ message, fields: path[0] })
-  //   }
-  // }
-
   return (
     <>
       <Toggle />
-      <form ref={formRef}>
-        {/* <label>
-        username:
-        <div>
-          <input type="text" name="user" placeholder="username or email" onChange={handleChangeInput} />
-          <Warning /><Show/>
-        </div>
-      </label> */}
-        <Input name={'username'} placeholder={"username or email"} />
+      <form ref={formRef} name="loginForm">
+        <Input name={'user'} placeholder={"username or email"} />
         {errorsForm?.fields === 'user' && <p className="isError">{errorsForm.message}</p>}
-        <Input name="password" placeholder="password" isPassword />
+        <Input name="password" placeholder="password" type={TypeOfInput.password} />
         {errorsForm?.fields === 'pass' && <p className="isError">{errorsForm.message}</p>}
         <input type="button" value="Iniciar Sesion" onClick={(e) => handleSubmit(e)} />
         {errorsForm?.fields === '*' && <p className="isError">{errorsForm.message}</p>}
