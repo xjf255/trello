@@ -1,5 +1,5 @@
-import { NavLink, Outlet } from "react-router";
-import { PATHS } from "../utils/constant";
+import { NavLink, Outlet } from "react-router"
+import { PATHS } from "../utils/constant"
 
 export default function Home() {
   return (

@@ -1,20 +1,33 @@
 import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
 import { PATHS } from "../utils/constant"
+import { useUserActions } from "../hooks/useUserActions"
 
 export default function DashBoard() {
   const navigate = useNavigate()
+  const { user, removeUser } = useUserActions()
+  const [redirecting, setRedirecting] = useState(false)
+
+  useEffect(() => {
+    if (!user && !redirecting) {
+      console.log("Usuario no autenticado, redirigiendo...")
+      setRedirecting(true)
+      navigate(PATHS.verification.login)
+    }
+  }, [user, navigate, redirecting])
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    
+
     try {
-      const response = await fetch('http://localhost:1234/verification/logout', { 
+      const response = await fetch("http://localhost:1234/verification/logout", {
         method: "POST",
-        credentials: "include"
+        credentials: "include",
       })
-      
+
       if (response.ok) {
-        navigate(PATHS.verification.login)
+        console.log("Logout exitoso, removiendo usuario...")
+        await removeUser()
       } else {
         console.error("Error en logout:", response.statusText)
       }
@@ -23,10 +36,17 @@ export default function DashBoard() {
     }
   }
 
+  if (!user) return <h1>Redirigiendo...</h1> // ✅ Maneja el caso antes de redirigir
+
   return (
     <>
-      Home
-      <button onClick={handleClick}>log out</button>
+      <header>
+        <h1>Welcome, {user?.user || "Guest"}</h1>
+        <span>
+          {user?.avatar && <img className="user__avatar" src={user.avatar} alt={user.user || "User"} />}
+          <button onClick={handleClick}>Log Out</button>
+        </span>
+      </header>
     </>
   )
 }

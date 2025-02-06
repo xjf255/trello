@@ -7,6 +7,7 @@ export interface IUsers {
   updatedAt: Date
   isActive: boolean
   password?: string
+  avatar: string
 }
 export interface IUserStore extends IUsers {
   exp?: number

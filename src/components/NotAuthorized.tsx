@@ -10,7 +10,7 @@ export function NotAuthorized() {
     const timeoutId = setTimeout(() => {
       setIsRedirecting(true)
       navigate(PATHS.verification.login)
-    }, 5000)
+    }, 3000)
 
     return () => clearTimeout(timeoutId)
   }, [navigate])
@@ -20,7 +20,7 @@ export function NotAuthorized() {
 
   return (
     <div>
-      <h1>No autorizado. Por favor, inicie sesión.</h1>
+      <h1>Loading...</h1>
     </div>
   )
 }

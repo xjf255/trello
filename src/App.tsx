@@ -1,37 +1,46 @@
-import { lazy, Suspense } from 'react';
-import './App.css';
-import { Navigate, Route, Routes } from 'react-router';
-import ProtectedRoutes from './components/ProtectedRoutes';
-import { PATHS } from './utils/constant';
-import { Login } from './verification/components/Login';
-import { SignUp } from './verification/components/SignUp';
-import { useQuery } from '@tanstack/react-query';
-import FactorAuthentication from './verification/components/FactorAuthentication';
-import { ResetPassword } from './verification/components/ResetPassword';
+import { lazy, Suspense, useEffect } from 'react'
+import './App.css'
+import { Navigate, Route, Routes } from 'react-router'
+import ProtectedRoutes from './components/ProtectedRoutes'
+import { PATHS } from './utils/constant'
+import { Login } from './verification/components/Login'
+import { SignUp } from './verification/components/SignUp'
+import { useQuery } from '@tanstack/react-query'
+import FactorAuthentication from './verification/components/FactorAuthentication'
+import { ResetPassword } from './verification/components/ResetPassword'
+import { useUserActions } from './hooks/useUserActions'
+
+const Home = lazy(() => import('./home/Home'))
+const Verification = lazy(() => import('./verification/Verification'))
+const DashBoard = lazy(() => import('./dashBoard/DashBoard'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
-  const Home = lazy(() => import('./home/Home'));
-  const Verification = lazy(() => import('./verification/Verification'));
-  const DashBoard = lazy(() => import('./dashBoard/DashBoard'));
-  const NotFound = lazy(() => import('./pages/NotFound'));
+  const { user, addUser } = useUserActions()
 
-  const { data: user, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const response = await fetch('http://localhost:1234/verification/protected', { credentials: 'include' });
+      const response = await fetch('http://localhost:1234/verification/protected', { credentials: 'include' })
       if (!response.ok) {
-        throw new Error('No autorizado');
+        throw new Error('No autorizado')
       }
-      return response.json();
+      return response.json()
     },
-    retry: false,
-  });
+    staleTime: 0,
+    retry: false
+  })
 
-  const isAuth = !!user;
+  const isAuth = !!user || !!data
+
+  useEffect(() => {
+    if (data && !user) addUser({ ...data })
+  }, [data, addUser, user])
+  console.log('isAuth', isAuth, data)
+
   return (
     <>
       <Suspense fallback={<h1>Cargando...</h1>}>
-        {isLoading && <h1>Cargando...</h1>}
         <Routes>
           <Route
             path={PATHS.default}
@@ -51,6 +60,7 @@ export default function App() {
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>
-      </Suspense></>
-  );
+      </Suspense>
+    </>
+  )
 }

@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -32,7 +32,7 @@ body {
   }
 }
 
-span{
+span {
   display: flex;
   gap: 40px;
 }
@@ -45,7 +45,7 @@ main {
   background-size: cover;
 }
 
-header{
+header {
   display: flex;
   justify-content: space-between;
   padding-inline: 30px;
@@ -60,6 +60,20 @@ form {
   align-items: center;
 }
 
-.isError{
+.isError {
   color: rgb(242, 51, 51);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 30px;
+  align-items: center;
+
+  & .user__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }

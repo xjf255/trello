@@ -44,9 +44,10 @@ export const Login = () => {
     },
     onError: () => {
       queryClient.setQueryData(['user'], undefined)
+      throw new RequestError("try again later")
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] })
     }
   })
 
@@ -60,7 +61,7 @@ export const Login = () => {
       const password = formData.get('password')?.toString()
       const requiredFields = !user && !password ? '*' : !user ? 'user' : 'pass'
 
-      if (!password || !user) throw new ValidationError("all fields are neccesary", requiredFields);
+      if (!password || !user) throw new ValidationError("all fields are neccesary", requiredFields)
       setErrorsForm({})
       mutationUser.mutate({ user, password })
     } catch (error) {

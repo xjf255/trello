@@ -21,13 +21,11 @@ export const Input = ({ name, placeholder, type = TypeOfInput.text }: InputProps
       return
     }
     setIsEmpty(false)
-    console.log(user)
     const isEmail = user.includes('@')
     const validateField = validatedUser({ [isEmail ? "email" : name]: user })
     if (!validateField.success) {
       const { message } = JSON.parse(validateField.error.message)[0]
       setError(message)
-      console.log(message)
       return
     }
     setError('')
