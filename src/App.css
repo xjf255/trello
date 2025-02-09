@@ -69,11 +69,44 @@ header {
   justify-content: space-between;
   padding-inline: 30px;
   align-items: center;
+  margin: 20px;
+
+  & figure {
+    cursor: pointer;
+  }
 
   & .user__avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  & h1{
+    margin: 0;
+  }
+}
+
+.verification {
+  display: grid;
+  place-content: center;
+  height: 100dvh;
+
+  a {
+    color: rgb(8, 8, 63);
+    font-weight: 500;
+  }
+
+  h1{
+    color: rgb(245, 237, 237);
+  }
+
+  & .verification__modal {
+    background-color: rgb(99, 100, 103);
+    color: #eee;
+    width: 500px;
+    height: auto;
+    padding: 20px;
+    border-radius: 20px;
   }
 }

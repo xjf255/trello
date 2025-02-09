@@ -9,6 +9,8 @@ import { useQuery } from '@tanstack/react-query'
 import FactorAuthentication from './verification/components/FactorAuthentication'
 import { ResetPassword } from './verification/components/ResetPassword'
 import { useUserActions } from './hooks/useUserActions'
+import { Toaster } from 'sonner'
+import UserConfig from './dashBoard/UserConfig'
 
 const Home = lazy(() => import('./home/Home'))
 const Verification = lazy(() => import('./verification/Verification'))
@@ -31,15 +33,15 @@ export default function App() {
     retry: false
   })
 
-  const isAuth = !!user || !!data
+  const isAuth = !!user
 
   useEffect(() => {
     if (data && !user) addUser({ ...data })
   }, [data, addUser, user])
-  console.log('isAuth', isAuth, data)
 
   return (
     <>
+      <Toaster/>
       <Suspense fallback={<h1>Cargando...</h1>}>
         <Routes>
           <Route
@@ -57,6 +59,7 @@ export default function App() {
           </Route>
           <Route element={<ProtectedRoutes isAuthenticated={isAuth} />}>
             <Route path={PATHS.dashboard} element={<DashBoard />} />
+            <Route path={PATHS.settings} element={<UserConfig />} />
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>

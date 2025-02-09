@@ -8,5 +8,6 @@ export const PATHS = {
     passwordReset:'/verification/password_reset'
   },
   dashboard:'/dashboard',
+  settings:'/settings',
   all:'*'
 }

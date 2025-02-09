@@ -8,11 +8,13 @@ export default function Verification() {
     if (location.pathname === '/verification') {
       navigator(PATHS.verification.login)
     }
-  }, [location.pathname])
+  }, [navigator])
   return (
-    <>
-      <h1>Verification</h1>
-      <Outlet />
-    </>
+    <section className="verification">
+      <div className="verification__modal">
+        <h1>Verification</h1>
+        <Outlet />
+      </div>
+    </section>
   )
 }
