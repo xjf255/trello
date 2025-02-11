@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { PATHS } from "../../utils/constant"
 import { useLocation, useNavigate } from "react-router"
 import { useUserActions } from "../../hooks/useUserActions"
+import { ReturnArrow } from "../../components/Icons"
 
 export default function Header() {
   const location = useLocation()
@@ -53,7 +54,7 @@ export default function Header() {
 
   return (
     <header>
-      {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.dashboard)}>return</i>}
+      {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.dashboard)}><ReturnArrow /></i>}
       <span>
         <figure onClick={() => changePage(PATHS.settings)}>
           {user?.avatar && <img className="user__avatar" src={user.avatar} alt={user.user || "User"} />}

@@ -36,6 +36,7 @@ export default function App() {
   const isAuth = !!user
 
   useEffect(() => {
+    console.log(data)
     if (data && !user) addUser({ ...data })
   }, [data, addUser, user])
 

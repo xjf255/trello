@@ -7,7 +7,7 @@ export interface IUsers {
   updatedAt: Date
   isActive: boolean
   password?: string
-  avatar: string
+  avatar: string | File
 }
 export interface IUserStore extends IUsers {
   exp?: number
@@ -16,4 +16,5 @@ export interface IUserStore extends IUsers {
 
 export type IUser = Pick<IUsers, 'user' | 'password' >
 export type IUserSignUp = Pick<IUsers, 'user' | 'password' | 'email', 'phone'>
+export type IUpdateUser = Omit<IUsers,"createdAt" | "id"|"updatedAt">
 
