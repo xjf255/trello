@@ -30,7 +30,7 @@ export default function App() {
       return response.json()
     },
     staleTime: 0,
-    retry: false
+    retry: true
   })
 
   const isAuth = !!user
@@ -47,11 +47,11 @@ export default function App() {
         <Routes>
           <Route
             path={PATHS.default}
-            element={isAuth ? <Navigate to={PATHS.dashboard} replace /> : <Home />}
+            element={isAuth ? <Navigate to={PATHS.user.dashboard} replace /> : <Home />}
           />
           <Route
             path={PATHS.verification.default}
-            element={isAuth ? <Navigate to={PATHS.dashboard} replace /> : <Verification />}
+            element={isAuth ? <Navigate to={PATHS.user.dashboard} replace /> : <Verification />}
           >
             <Route path={PATHS.verification.signup} element={<SignUp />} />
             <Route path={PATHS.verification.login} element={<Login />} />
@@ -59,8 +59,8 @@ export default function App() {
             <Route path={PATHS.verification.passwordReset} element={<ResetPassword />} />
           </Route>
           <Route element={<ProtectedRoutes isAuthenticated={isAuth} />}>
-            <Route path={PATHS.dashboard} element={<DashBoard />} />
-            <Route path={PATHS.settings} element={<UserConfig />} />
+            <Route path={PATHS.user.dashboard} element={<DashBoard />} />
+            <Route path={PATHS.user.settings} element={<UserConfig />} />
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>

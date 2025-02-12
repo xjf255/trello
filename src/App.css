@@ -17,6 +17,10 @@ body {
   background-color: beige;
 }
 
+input {
+  background-color: #ffe;
+}
+
 .auth__toggle {
   display: flex;
   align-items: center;
@@ -58,6 +62,7 @@ section {
 
   & form {
     padding: 20px;
+    border-radius: 10px;
     background-color: #dbdbdb;
     width: 400px;
     margin-top: 20px;
@@ -67,10 +72,12 @@ section {
     align-items: start;
 
     & label {
+      width: 100%;
+      overflow: hidden;
       display: grid;
       text-align: start;
       gap: 20px;
-      grid-template-columns: repeat(1, 100px 1fr);
+      grid-template-columns: repeat(1, 120px 1fr);
     }
   }
 }

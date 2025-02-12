@@ -25,10 +25,10 @@ export const SignUp = () => {
   }
 
   const mutationUser = useMutation({
-    mutationFn: ({ password, user, email, phone }: IUserSignUp) => createUser({ password, user, email, phone}),
+    mutationFn: ({ password, user, email, phone }: IUserSignUp) => createUser({ password, user, email, phone }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      navigate(PATHS.dashboard)
+      navigate(PATHS.user.dashboard)
     },
     onError: () => {
       queryClient.setQueryData(['user'], undefined)

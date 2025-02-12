@@ -5,6 +5,7 @@ import { Input } from "../verification/components/Input"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { RequestError } from "../utils/customErrors/requestErrors"
 import { IUpdateUser } from "../types"
+import { InputFile } from "../components/InputFile"
 
 export default function UserConfig() {
   const { user } = useUserActions()
@@ -22,7 +23,6 @@ export default function UserConfig() {
         formData.append(key, value.toString())
       }
     })
-    console.log(formData)
 
     const response = await fetch(`http://localhost:1234/users/${user?.id}`, {
       method: 'PUT',
@@ -86,10 +86,7 @@ export default function UserConfig() {
       <h2>Settings</h2>
       <div>
         <form ref={formRef} encType="multipart/form-data">
-          <label>
-            Avatar:
-            <input type="file" name="avatar" accept="image/png, image/jpeg" />
-          </label>
+          <InputFile name="avatar" />
           <Input name="user" placeholder={user?.user ?? "Enter your new username"} />
           <Input name="email" placeholder={user?.email ?? "Enter your email address"} />
           <Input name="phone" placeholder={user?.phone?.slice(-2).padStart(8, "*") ?? "Enter your phone number"} type={TypeOfInput.number} />

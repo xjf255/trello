@@ -8,6 +8,7 @@ import { Input } from "./Input"
 import { Toggle } from "./Toggle"
 import { IUser } from "../../types.ts"
 import { TypeOfInput } from "../../type.ts"
+import { toast } from "sonner"
 
 interface IErrorsForm {
   message?: string
@@ -19,6 +20,15 @@ export const Login = () => {
   const [errorsForm, setErrorsForm] = useState<IErrorsForm>()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+
+  const reactiveAccount = async () => {
+    const response = await fetch('http://localhost:1234/users/reactive', {
+      method: "POST",
+      credentials: "include"
+    })
+    if (!response.ok) throw new RequestError("Not Found User")
+    return response.json()
+  }
 
   const loginUser = async ({ user, password }: IUser) => {
     const response = await fetch('http://localhost:1234/verification/login', {
@@ -32,6 +42,14 @@ export const Login = () => {
         password
       })
     })
+    console.log(response.status)
+    if (response.status === 401) {
+      toast.warning("Usuario inactivo, activando cuenta...")
+      await reactiveAccount()
+      toast.success("Cuenta activada. Iniciando sesión...")
+      location.reload()
+    }
+
     if (!response.ok) throw new RequestError("try again later")
     return response.json()
   }
@@ -40,7 +58,7 @@ export const Login = () => {
     mutationFn: ({ password, user }: { password: string, user: string }) => loginUser({ password, user }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      navigate(PATHS.dashboard)
+      navigate(PATHS.user.dashboard)
     },
     onError: () => {
       queryClient.setQueryData(['user'], undefined)

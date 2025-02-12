@@ -20,7 +20,7 @@ export default function Header() {
   }, [user, navigate, redirecting])
 
   useEffect(() => {
-    if (location.pathname !== PATHS.dashboard && isDashboard) return setIsDashboard(false)
+    if (location.pathname !== PATHS.user.dashboard && isDashboard) return setIsDashboard(false)
     return setIsDashboard(true)
   }, [location.pathname])
 
@@ -44,20 +44,20 @@ export default function Header() {
     }
   }
 
-  const changePage = (URL:string) => {
+  const changePage = (URL: string) => {
     navigate(URL)
   }
 
 
 
-  if (!user) return <h1>Redirigiendo...</h1> // Maneja el caso antes de redirigir
+  if (!user) return <h1>Redirigiendo...</h1>
 
   return (
     <header>
-      {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.dashboard)}><ReturnArrow /></i>}
+      {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.user.dashboard)}><ReturnArrow /></i>}
       <span>
-        <figure onClick={() => changePage(PATHS.settings)}>
-          {user?.avatar && <img className="user__avatar" src={user.avatar} alt={user.user || "User"} />}
+        <figure onClick={() => changePage(PATHS.user.settings)}>
+          {user?.avatar && <img className="user__avatar" src={user.avatar as string} alt={user.user || "User"} />}
         </figure>
         <button onClick={handleClick}>Log Out</button>
       </span>
