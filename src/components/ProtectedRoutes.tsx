@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { NotAuthorized } from "./NotAuthorized"
-import Header from "../dashBoard/components/Header"
+import Header from "../user/components/Header"
+import Aside from "../user/components/Aside"
 interface Props {
   isAuthenticated: boolean
 }
@@ -12,6 +13,7 @@ export default function ProtectedRoutes({ isAuthenticated = false }: Props) {
   return (
     <>
       <Header />
+      <Aside />
       <Outlet />
     </>
   )

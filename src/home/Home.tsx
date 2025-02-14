@@ -1,5 +1,7 @@
 import { NavLink, Outlet } from "react-router"
 import { PATHS } from "../utils/constant"
+import Calendar from "../user/Calendar"
+import { Modal } from "../components/Modal"
 
 export default function Home() {
   return (
@@ -11,8 +13,12 @@ export default function Home() {
           <NavLink to={PATHS.verification.login}>Login</NavLink>
         </span>
       </header>
-      <main />
-      <Outlet />
+      <main>
+        <div className="hero" />
+        <Calendar />
+        <Modal />
+        <Outlet />
+      </main>
     </>
   )
 }

@@ -58,7 +58,7 @@ export const Login = () => {
     mutationFn: ({ password, user }: { password: string, user: string }) => loginUser({ password, user }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      navigate(PATHS.user.dashboard)
+      navigate(PATHS.user.workerspace.dashboard)
     },
     onError: () => {
       queryClient.setQueryData(['user'], undefined)

@@ -1,0 +1,24 @@
+.calendar{
+  width: 100vw;
+  padding: 10px;
+  user-select: none;
+}
+
+.calendar__area{
+  width: 70vw;
+  padding: 10px;
+  user-select: none;
+}
+
+tbody {
+  & td {
+    width: 100px;
+    height: 100px;
+
+    & .today {
+      padding: 4px;
+      border-radius: 50%;
+      background-color: #949494;
+    }
+  }
+}

@@ -20,9 +20,9 @@ export default function Header() {
   }, [user, navigate, redirecting])
 
   useEffect(() => {
-    if (location.pathname !== PATHS.user.dashboard && isDashboard) return setIsDashboard(false)
+    if (location.pathname !== PATHS.user.workerspace.dashboard && isDashboard) return setIsDashboard(false)
     return setIsDashboard(true)
-  }, [location.pathname])
+  }, [location.pathname, isDashboard])
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -54,7 +54,7 @@ export default function Header() {
 
   return (
     <header>
-      {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.user.dashboard)}><ReturnArrow /></i>}
+      {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.user.workerspace.dashboard)}><ReturnArrow /></i>}
       <span>
         <figure onClick={() => changePage(PATHS.user.settings)}>
           {user?.avatar && <img className="user__avatar" src={user.avatar as string} alt={user.user || "User"} />}
