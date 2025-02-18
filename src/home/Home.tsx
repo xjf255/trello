@@ -2,10 +2,11 @@ import { NavLink, Outlet } from "react-router"
 import { PATHS } from "../utils/constant"
 import Calendar from "../user/Calendar"
 import { Modal } from "../components/Modal"
+import { ModalProvider } from "../context/modal/sliceState"
 
 export default function Home() {
   return (
-    <>
+    <ModalProvider>
       <header>
         <h1>Trello</h1>
         <span>
@@ -19,6 +20,6 @@ export default function Home() {
         <Modal />
         <Outlet />
       </main>
-    </>
+    </ModalProvider>
   )
 }

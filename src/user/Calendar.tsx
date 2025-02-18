@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { ReturnArrow } from "../components/Icons";
 import { DAYS, MONTHS } from "../utils/constant";
 import "./Calendar.css"
+import { useModal } from "../hooks/useModal";
 
 enum typeChangeMonth {
   next = "next",
   previous = "previous"
 }
-
 interface IDate {
   day: number,
   daysOfMonth: number,
@@ -18,6 +18,7 @@ interface IDate {
 
 export default function Calendar() {
   const currentDate = new Date()
+  const { changeModalState } = useModal()
   const [date, setDate] = useState<IDate>({
     day: currentDate.getDate(),
     month: currentDate.getMonth(),
@@ -35,8 +36,8 @@ export default function Calendar() {
   }
 
   const handleClickDay = (day: number) => {
-    // open modal an create event these day
-    alert(day)
+    changeModalState()
+    // alert(day)
   }
   useEffect(() => {
     setDate((prev) => ({
@@ -74,7 +75,7 @@ export default function Calendar() {
             </tr>
           </thead>
           <tbody>
-            {daysCalendar.map((week : number[], i: number) => {
+            {daysCalendar.map((week: number[], i: number) => {
               return (
                 <tr key={i}>
                   {week.map((day: number, j: number) => {
