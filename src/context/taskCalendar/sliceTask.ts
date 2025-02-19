@@ -1,30 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-interface dateOfTask {
-  day: number,
-  month: number,
-  year: number
-}
+import { Task, TaskId, TaskState } from "../../types";
 
-type TaskId = string
-
-interface Task {
-  date: dateOfTask,
-  taskTitle: string,
-  taskDescription: string
-}
-
-interface TaskState extends Task {
-  id: TaskId
-}
 
 const initialState: TaskState[] = [{
   id: "1",
-  date: {
-    day: 18,
-    month: 1,
-    year: 2025
-  },
+  day: 18,
+  month: 1,
+  year: 2025,
   taskTitle: "Test",
+  color: "#434343",
   taskDescription: "state testing"
 }]
 
@@ -41,7 +25,7 @@ const taskSlice = createSlice({
     },
     updateTask: (state, action: PayloadAction<TaskState>) => {
       const taskId = state.findIndex(task => task.id === action.payload.id)
-      if (taskId !== -1){
+      if (taskId !== -1) {
         state[taskId] = action.payload
       }
     }

@@ -41,7 +41,7 @@ export default function App() {
   }, [data, addUser, user])
 
   return (
-    <>
+    < >
       <Toaster />
       <Suspense fallback={<h1>Cargando...</h1>}>
         <Routes>

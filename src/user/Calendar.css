@@ -1,13 +1,23 @@
-.calendar{
+.calendar {
   width: 100vw;
   padding: 10px;
   user-select: none;
 }
 
-.calendar__area{
+.calendar__area {
   width: 70vw;
   padding: 10px;
   user-select: none;
+}
+
+.calendar__task {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 tbody {
