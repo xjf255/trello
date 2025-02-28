@@ -22,7 +22,7 @@ export default function Header() {
   useEffect(() => {
     if (location.pathname !== PATHS.user.workerspace.dashboard && isDashboard) return setIsDashboard(false)
     return setIsDashboard(true)
-  }, [location.pathname, isDashboard])
+  }, [location.pathname])
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -48,10 +48,7 @@ export default function Header() {
     navigate(URL)
   }
 
-
-
   if (!user) return <h1>Redirigiendo...</h1>
-
   return (
     <header>
       {isDashboard ? <h1>Welcome, {user?.user || "Guest"}</h1> : <i onClick={() => changePage(PATHS.user.workerspace.dashboard)}><ReturnArrow /></i>}

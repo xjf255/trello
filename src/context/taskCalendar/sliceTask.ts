@@ -2,15 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Task, TaskId, TaskState } from "../../types";
 
 
-const initialState: TaskState[] = [{
-  id: "1",
-  day: 18,
-  month: 1,
-  year: 2025,
-  taskTitle: "Test",
-  color: "#434343",
-  taskDescription: "state testing"
-}]
+const initialState: TaskState[] = []
 
 const taskSlice = createSlice({
   name: "tasks",

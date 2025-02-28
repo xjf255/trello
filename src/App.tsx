@@ -11,9 +11,9 @@ import { Toaster } from 'sonner'
 
 const Home = lazy(() => import('./home/Home'))
 const Verification = lazy(() => import('./verification/Verification'))
-const DashBoard = lazy(() => import('./user/DashBoard'))
+const DashBoard = lazy(() => import('./pages/DashBoard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
-const Calendar = lazy(() => import('./user/Calendar'))
+const Calendar = lazy(() => import('./pages/Calendar'))
 const UserConfig = lazy(() => import('./user/UserConfig'))
 const FactorAuthentication = lazy(() => import('./verification/components/FactorAuthentication'))
 const ProtectedRoutes = lazy(() => import('./components/ProtectedRoutes'))
@@ -41,7 +41,7 @@ export default function App() {
   }, [data, addUser, user])
 
   return (
-    < >
+    <>
       <Toaster />
       <Suspense fallback={<h1>Cargando...</h1>}>
         <Routes>

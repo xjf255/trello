@@ -1,12 +1,10 @@
 import { NavLink } from "react-router";
 import { PATHS } from "../../utils/constant";
+import "../../styles/Aside.css"
 
 export default function Aside() {
   return (
     <aside>
-      <header>
-        
-      </header>
       <ul>
         {Object.entries(PATHS.user.workerspace).map(([space, path]) => {
           return (

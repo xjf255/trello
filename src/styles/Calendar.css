@@ -21,14 +21,32 @@
 }
 
 tbody {
-  & td {
+  tr {
+    height: 120px;
+    overflow-y: hidden;
+  }
+
+  td {
     width: 100px;
+    height: 100%;
+    overflow: hidden;
     height: 100px;
+    font-weight: 600;
+
+    ul {
+      height: 68px;
+      display: flex;
+      overflow-y: scroll;
+      gap: 4px;
+      flex-direction: column;
+      color: rgb(225, 233, 252);
+      scrollbar-width: none;
+    }
 
     & .today {
-      padding: 4px;
+      padding: 6px;
       border-radius: 50%;
-      background-color: #949494;
+      background-color: #a4d3e0;
     }
   }
 }

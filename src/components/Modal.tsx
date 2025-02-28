@@ -6,13 +6,20 @@ import { useModal } from '../hooks/useModal'
 import { TASK_COLORS } from '../utils/constant'
 import { useTaskActions } from '../hooks/useTaskActions'
 
+const DEFAULT_FORM = {
+  taskTitle: "",
+  color: "",
+  taskDescription: ""
+}
+
 export function Modal() {
   const [color, setColor] = useState("")
   const { create } = useTaskActions()
+  const [defaultFormValues, setDefaultFormValues] = useState(DEFAULT_FORM)
   const { isOpen, changeModalState } = useModal()
-  const formRef = useRef(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!formRef.current) return
     const $form = new FormData(formRef.current)
@@ -26,15 +33,23 @@ export function Modal() {
   }
 
   useEffect(() => {
+    const taskToUpdate = localStorage.getItem('taskToUpdate')
+    if (taskToUpdate) {
+      setDefaultFormValues(JSON.parse(taskToUpdate))
+      localStorage.removeItem("taskToUpdate")
+    } else { setDefaultFormValues(DEFAULT_FORM) }
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") changeModalState()
     }
 
     if (isOpen) document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+    }
   }, [isOpen, changeModalState])
 
   if (!isOpen) return null
+  console.log('render2')
 
   return createPortal(
     <div className='dark' onClick={changeModalState}>
@@ -45,14 +60,14 @@ export function Modal() {
             <CloseModal />
           </figure>
         </header>
-        <form className='task__modal' ref={formRef}>
+        <form className='task__modal' ref={formRef} onSubmit={handleSubmit}>
           <label>
             Title:
-            <input type="text" name="title" placeholder='My task...' />
+            <input type="text" name="title" placeholder='My task...' defaultValue={defaultFormValues.taskTitle} />
           </label>
           <label>
             Description:
-            <textarea name="description"></textarea>
+            <textarea name="description" defaultValue={defaultFormValues.taskDescription}></textarea>
           </label>
           <label>Color:</label>
           <section className='circle__area'>
@@ -62,12 +77,13 @@ export function Modal() {
                 name="color"
                 className='circle'
                 type='radio'
+                defaultChecked={defaultFormValues.color === `#${color}`}
                 onClick={() => setColor(`#${color}`)}
                 style={{ backgroundColor: `#${color}` }}
               />
             ))}
           </section>
-          <button onClick={handleClick}>create task</button>
+          <button>create task</button>
         </form>
       </div>
     </div>,

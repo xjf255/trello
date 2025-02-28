@@ -1,0 +1,30 @@
+.documents {
+
+  width: 100%;
+  display: flex;
+  place-content: start;
+
+  & .documents__list {
+    list-style: none;
+    padding: 30px 40px;
+
+    & li {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  & .documents__new {
+    width: 180px;
+    height: 240px;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 11px 1px rgba(0, 0, 0, 0.38);
+    -webkit-box-shadow: 0px 2px 11px 1px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 0px 2px 11px 1px rgba(0, 0, 0, 0.38);
+  }
+}

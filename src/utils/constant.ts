@@ -10,7 +10,7 @@ export const PATHS = {
   user: {
     settings: '/settings',
     workerspace: {
-      table: "/table", 
+      documents: "/documents", 
       calendar: '/calendar',
       dashboard: '/dashboard'
     }
