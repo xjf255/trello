@@ -5,7 +5,7 @@
   place-content: inherit;
   padding: 20px 10px;
 
-  & > .dashboard__header {
+  &>.dashboard__header {
     padding: 0;
     margin: 0;
 
@@ -13,11 +13,16 @@
       font-size: 30px;
     }
 
-    & > button {
+    &>button {
       color: aliceblue;
       font-weight: 600;
       background-color: rgb(100, 100, 255);
     }
+  }
+
+  .dashboard__list {
+    background-color: red;
+    display: flex;
   }
 
   & .dashboard__item {
@@ -30,7 +35,11 @@
 
     & * {
       margin: 0;
+    }
+
+    & header {
       padding: 0;
+      text-align: start;
     }
 
     & h5 {
@@ -41,11 +50,52 @@
       resize: vertical;
       scrollbar-width: none;
       max-height: 200px;
+      height: 40px;
       field-sizing: content;
       width: 100%;
       padding: 10px;
     }
 
+    & footer {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-wrap: wrap;
+
+      input {
+        display: none;
+      }
+
+      div {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        &>div {
+          display: flex;
+          gap: 2px;
+        }
+
+        i {
+          cursor: pointer;
+
+          &>svg:hover {
+            opacity: .7;
+          }
+
+          &.liked {
+            svg {
+              fill: red;
+
+              path {
+                stroke: red;
+              }
+            }
+          }
+        }
+
+      }
+    }
   }
 
   .btn--show {
@@ -54,5 +104,43 @@
     background-color: whitesmoke;
     width: 100%;
     border: 1px solid black;
+  }
+
+  .comments {
+    padding: 10px 0;
+    background: #a6fb98;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+
+    & > .comments__comment {
+      width: 100%;
+      display: flex;
+      justify-content: start;
+      gap: 10px;
+      padding: 0 20px;
+      align-items: center;
+      position: relative;
+
+      & > figure {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      & > .comment__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        & > * {
+          text-align: start;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from "react-router"
 import { PATHS } from "../utils/constant"
-import Documents from "../pages/Documents"
 
 export default function Home() {
   return (
@@ -14,7 +13,6 @@ export default function Home() {
       </header>
       <main>
         <div className="hero" />
-        <Documents />
         <Outlet />
       </main>
     </>

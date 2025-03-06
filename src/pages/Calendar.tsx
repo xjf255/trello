@@ -6,7 +6,6 @@ import { useModal } from "../hooks/useModal"
 import { useTaskActions } from "../hooks/useTaskActions"
 import { IDate } from "../types"
 import { Modal } from "../components/Modal"
-import { ModalProvider } from "../context/modal/sliceState"
 
 enum typeChangeMonth {
   next = "next",
@@ -57,11 +56,9 @@ export default function Calendar() {
   const handleClickDay = (day: number, year: number, month: number) => {
     localStorage.setItem("taskDate", JSON.stringify({ day, year, month }))
     changeModalState()
-
   }
 
   const updateTask = (e: React.MouseEvent, object: object) => {
-    console.log(object)
     localStorage.setItem("taskToUpdate", JSON.stringify(object))
     changeModalState()
     e.stopPropagation()
@@ -75,69 +72,66 @@ export default function Calendar() {
     return rows
   }, [] as (number | null)[][])
 
-  console.log('render')
   return (
-    <ModalProvider>
-      <section className="calendar">
-        <div className="calendar__area">
-          <header>
-            <i onClick={() => changeMonth(typeChangeMonth.previous)}>
-              <ReturnArrow />
-            </i>
-            <h2>
-              {MONTHS[date.month]} {date.year}
-            </h2>
-            <i style={{ transform: "rotate(180deg)" }} onClick={() => changeMonth(typeChangeMonth.next)}>
-              <ReturnArrow />
-            </i>
-          </header>
-          <table>
-            <thead>
-              <tr>
-                {DAYS.map((day) => (
-                  <td key={day}>{day}</td>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {daysCalendar.map((week: [], i: number) => (
-                <tr key={i}>
-                  {week.map((day, j) => {
-                    const isToday =
-                      day !== null &&
-                      day + 1 === currentDate.getDate() &&
-                      date.month === currentDate.getMonth() &&
-                      date.year === currentDate.getFullYear()
-
-                    const currentTask = tasks?.filter((el) => el.day === day + 1) ?? null
-                    return (
-                      <td key={j} onClick={() => day !== null && handleClickDay(day + 1, date.year, date.month)}>
-                        {day !== null ? (
-                          isToday ? (
-                            <i className="today">
-                              <strong>{day + 1}</strong>
-                            </i>
-                          ) : (
-                            <strong>{day + 1}</strong>
-                          )
-                        ) : (
-                          ""
-                        )}
-                        {currentTask !== null && currentTask.length > 0 && <ul>
-                          {currentTask.length > 0 && currentTask?.map((task, index) => (
-                            <li key={index}><p className="calendar__task" style={{ background: `${task.color}` }} onClick={(e) => updateTask(e, task)}>{task.taskTitle}</p></li>
-                          ))}
-                        </ul>}
-                      </td>
-                    )
-                  })}
-                </tr>
+    <section className="calendar">
+      <div className="calendar__area">
+        <header>
+          <i onClick={() => changeMonth(typeChangeMonth.previous)}>
+            <ReturnArrow />
+          </i>
+          <h2>
+            {MONTHS[date.month]} {date.year}
+          </h2>
+          <i style={{ transform: "rotate(180deg)" }} onClick={() => changeMonth(typeChangeMonth.next)}>
+            <ReturnArrow />
+          </i>
+        </header>
+        <table>
+          <thead>
+            <tr>
+              {DAYS.map((day) => (
+                <td key={day}>{day}</td>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+            </tr>
+          </thead>
+          <tbody>
+            {daysCalendar.map((week: [], i: number) => (
+              <tr key={i}>
+                {week.map((day, j) => {
+                  const isToday =
+                    day !== null &&
+                    day + 1 === currentDate.getDate() &&
+                    date.month === currentDate.getMonth() &&
+                    date.year === currentDate.getFullYear()
+
+                  const currentTask = tasks?.filter((el) => el.day === day + 1) ?? null
+                  return (
+                    <td key={j} onClick={() => day !== null && handleClickDay(day + 1, date.year, date.month)}>
+                      {day !== null ? (
+                        isToday ? (
+                          <i className="today">
+                            <strong>{day + 1}</strong>
+                          </i>
+                        ) : (
+                          <strong>{day + 1}</strong>
+                        )
+                      ) : (
+                        ""
+                      )}
+                      {currentTask !== null && currentTask.length > 0 && <ul>
+                        {currentTask.length > 0 && currentTask?.map((task, index) => (
+                          <li key={index}><p className="calendar__task" style={{ background: `${task.color}` }} onClick={(e) => updateTask(e, task)}>{task.taskTitle}</p></li>
+                        ))}
+                      </ul>}
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Modal />
-    </ModalProvider>
+    </section>
   )
 }

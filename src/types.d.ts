@@ -1,7 +1,7 @@
 export interface IUsers {
   id: string
   user: string
-  email: string,  
+  email: string
   phone: string
   createdAt: Date
   updatedAt: Date
@@ -14,22 +14,22 @@ export interface IUserStore extends IUsers {
   iat?: number
 }
 
-export type IUser = Pick<IUsers, 'user' | 'password' >
+export type IUser = Pick<IUsers, 'user' | 'password'>
 export type IUserSignUp = Pick<IUsers, 'user' | 'password' | 'email', 'phone'>
-export type IUpdateUser = Omit<IUsers,"createdAt" | "id"|"updatedAt">
+export type IUpdateUser = Omit<IUsers, "createdAt" | "id" | "updatedAt">
 
 interface dateOfTask {
-  day: number,
-  month: number,
+  day: number
+  month: number
   year: number
 }
 
-interface IDate extends dateOfTask{
-  daysOfMonth: number,
+interface IDate extends dateOfTask {
+  daysOfMonth: number
   startsOn: number
 }
 
-export type TaskId = string
+export type Id = string
 
 export interface Task extends dateOfTask {
   taskTitle: string,
@@ -38,10 +38,35 @@ export interface Task extends dateOfTask {
 }
 
 export interface TaskState extends Task {
-  id: TaskId
+  id: Id
 }
 
 interface IStateActions {
   task: TaskState[] | null
   user: IUserStore | null
+  board: IBoardWithId[] | null
 }
+
+export interface IComment {
+  commentId?: string
+  date: number
+  users: string
+  comment: string
+}
+
+export interface ICreateBoard {
+  title: string
+  description: string
+  owner: string
+  date: number
+  users: string[]
+}
+export interface IBoard extends ICreateBoard{
+  likes: Id[]
+  comments: IComment[]
+}
+export interface IBoardWithId extends IBoard {
+  id: Id
+}
+
+export type IBoardState = IBoardWithId[]

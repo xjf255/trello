@@ -5,6 +5,8 @@ import '../styles/Modal.css'
 import { useModal } from '../hooks/useModal'
 import { TASK_COLORS } from '../utils/constant'
 import { useTaskActions } from '../hooks/useTaskActions'
+import { useBoardActions } from '../hooks/useBoardActions'
+import { useUserActions } from '../hooks/useUserActions'
 
 const DEFAULT_FORM = {
   taskTitle: "",
@@ -12,9 +14,11 @@ const DEFAULT_FORM = {
   taskDescription: ""
 }
 
-export function Modal() {
+export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
   const [color, setColor] = useState("")
   const { create } = useTaskActions()
+  const { user } = useUserActions()
+  const { createNewBoard } = useBoardActions()
   const [defaultFormValues, setDefaultFormValues] = useState(DEFAULT_FORM)
   const { isOpen, changeModalState } = useModal()
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -26,9 +30,16 @@ export function Modal() {
     const taskTitle = $form.get("title")?.toString().trim()
     const taskDescription = $form.get("description")?.toString().trim()
     const date = localStorage.getItem("taskDate")
-    if (taskTitle === "" || taskDescription === "" || color === "" || !date) return
-    const dateInfo = JSON.parse(date)
-    create({ taskTitle, taskDescription, color, ...dateInfo })
+    const members = $form.get("members")?.toString().trim()
+    if (!taskTitle || !taskDescription || !date) return
+    if (!isDashboard) {
+      if (color === "") return
+      const dateInfo = JSON.parse(date)
+      create({ taskTitle, taskDescription, color, ...dateInfo })
+    } else {
+      if (!members) return
+      createNewBoard({ title: taskTitle, description: taskDescription, owner: user?.user ?? "", date: Date.now(), users: members.split(",") })
+    }
     changeModalState()
   }
 
@@ -47,9 +58,7 @@ export function Modal() {
       document.removeEventListener("keydown", handleKeyDown)
     }
   }, [isOpen, changeModalState])
-
   if (!isOpen) return null
-  console.log('render2')
 
   return createPortal(
     <div className='dark' onClick={changeModalState}>
@@ -69,20 +78,26 @@ export function Modal() {
             Description:
             <textarea name="description" defaultValue={defaultFormValues.taskDescription}></textarea>
           </label>
-          <label>Color:</label>
-          <section className='circle__area'>
-            {TASK_COLORS.map(color => (
-              <input
-                key={color}
-                name="color"
-                className='circle'
-                type='radio'
-                defaultChecked={defaultFormValues.color === `#${color}`}
-                onClick={() => setColor(`#${color}`)}
-                style={{ backgroundColor: `#${color}` }}
-              />
-            ))}
-          </section>
+          {isDashboard && <label>
+            Members:
+            <input name="members" placeholder='ej. trello@gmail.com,...'></input>
+          </label>}
+          {!isDashboard && <>
+            <label>Color:</label>
+            <section className='circle__area'>
+              {TASK_COLORS.map(color => (
+                <input
+                  key={color}
+                  name="color"
+                  className='circle'
+                  type='radio'
+                  defaultChecked={defaultFormValues.color === `#${color}`}
+                  onClick={() => setColor(`#${color}`)}
+                  style={{ backgroundColor: `#${color}` }}
+                />
+              ))}
+            </section>
+            </>}
           <button>create task</button>
         </form>
       </div>

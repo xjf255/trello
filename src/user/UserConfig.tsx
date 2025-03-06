@@ -86,7 +86,10 @@ export default function UserConfig() {
       <h2>Settings</h2>
       <div>
         <form ref={formRef} encType="multipart/form-data">
-          <InputFile name="avatar" />
+          <label>
+            avatar:
+            <InputFile name="avatar" typesAccepted="image/png, image/jpeg" />
+          </label>
           <Input name="user" placeholder={user?.user ?? "Enter your new username"} />
           <Input name="email" placeholder={user?.email ?? "Enter your email address"} />
           <Input name="phone" placeholder={user?.phone?.slice(-2).padStart(8, "*") ?? "Enter your phone number"} type={TypeOfInput.number} />

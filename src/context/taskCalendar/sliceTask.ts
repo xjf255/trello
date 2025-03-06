@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Task, TaskId, TaskState } from "../../types";
+import { Id, Task, TaskState } from "../../types";
 
 
 const initialState: TaskState[] = []
@@ -12,7 +12,7 @@ const taskSlice = createSlice({
       const id = crypto.randomUUID()
       state.push({ id, ...action.payload })
     },
-    removeTask: (state, action: PayloadAction<TaskId>) => {
+    removeTask: (state, action: PayloadAction<Id>) => {
       return state.filter(task => task.id !== action.payload)
     },
     updateTask: (state, action: PayloadAction<TaskState>) => {

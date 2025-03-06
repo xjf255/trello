@@ -10,12 +10,7 @@ export const ReturnArrow = () => <svg width="32px" height="32px" viewBox="0 0 24
   <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
 
-export const IconUpload = () => <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path opacity="0.5" d="M3 15C3 17.8284 3 19.2426 3.87868 20.1213C4.75736 21 6.17157 21 9 21H15C17.8284 21 19.2426 21 20.1213 20.1213C21 19.2426 21 17.8284 21 15" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  <path d="M12 16V3M12 3L16 7.375M12 3L8 7.375" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-</svg>
-
-export const Trash = () => <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const Trash = () => <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M20.5001 6H3.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
   <path d="M9.5 11L10 16" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
   <path d="M14.5 11L14 16" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
@@ -33,15 +28,11 @@ export const Plus = () => <svg width="32px" height="32px" viewBox="0 0 24 24" fi
   <path d="M4 12H20M12 4V20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
 
-export const Comment = ({ size = 32, color = "black" }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 32 32"
-    xmlns="http://www.w3.org/2000/svg"
-    fill={color}
-  >
-    <path d="M228,267 C226.896,267 226,267.896 226,269 C226,270.104 226.896,271 228,271 C229.104,271 230,270.104 230,269 C230,267.896 229.104,267 228,267 L228,267 Z M220,281 C218.832,281 217.704,280.864 216.62,280.633 L211.912,283.463 L211.975,278.824 C208.366,276.654 206,273.066 206,269 C206,262.373 212.268,257 220,257 C227.732,257 234,262.373 234,269 C234,275.628 227.732,281 220,281 L220,281 Z M220,255 C211.164,255 204,261.269 204,269 C204,273.419 206.345,277.354 210,279.919 L210,287 L217.009,282.747 C217.979,282.907 218.977,283 220,283 C228.836,283 236,276.732 236,269 C236,261.269 228.836,255 220,255 L220,255 Z M212,267 C210.896,267 210,267.896 210,269 C210,270.104 210.896,271 212,271 C213.104,271 214,270.104 214,269 C214,267.896 213.104,267 212,267 L212,267 Z M220,267 C218.896,267 218,267.896 218,269 C218,270.104 218.896,271 220,271 C221.104,271 222,270.104 222,269 C222,267.896 221.104,267 220,267 L220,267 Z" />
-  </svg>
-);
+export const CommentIcon = () => <svg width="24px" height="24px" viewBox="0 0 1024 1024" fill="#000000" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M285.6 555.2c-41.6 0-76-34.4-76-77.6s34.4-77.6 76-77.6 76 34.4 76 77.6-33.6 77.6-76 77.6zM512.8 555.2c-41.6 0-76-34.4-76-77.6s34.4-77.6 76-77.6 76 34.4 76 77.6-34.4 77.6-76 77.6zM739.2 555.2c-41.6 0-76-34.4-76-77.6s34.4-77.6 76-77.6 76 34.4 76 77.6-34.4 77.6-76 77.6zM307.2 925.6c-5.6 0-12-1.6-17.6-4-12.8-5.6-21.6-17.6-24-31.2l-20-123.2 42.4-9.6 20.8 122.4 132.8-77.6 2.4 45.6-115.2 72c-6.4 3.2-14.4 5.6-21.6 5.6z" fill="" /><path d="M512 57.6C240 57.6 18.4 235.2 18.4 454.4c0 156 112.8 292 276.8 356l-7.2-52.8C154.4 696.8 64.8 583.2 64.8 454.4 64.8 260.8 265.6 104 512 104s447.2 156.8 447.2 350.4c0 193.6-200.8 350.4-447.2 350.4-13.6 0-57.6-2.4-70.4-3.2l-40.8 39.2c36 6.4 73.6 10.4 111.2 10.4 272 0 493.6-177.6 493.6-396.8S784 57.6 512 57.6z" fill="" /></svg>
+
+export const LikeIcon = () => <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fillRule="evenodd" clipRule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+</svg>
+
+export const IconUpload = () => <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 6.414V16a1 1 0 1 1-2 0V6.414L8.707 8.707a1 1 0 0 1-1.414-1.414l4-4Z" fill="#000000" /><path d="M6 17a1 1 0 1 0-2 0v.6C4 19.482 5.518 21 7.4 21h9.2c1.882 0 3.4-1.518 3.4-3.4V17a1 1 0 1 0-2 0v.6c0 .778-.622 1.4-1.4 1.4H7.4c-.778 0-1.4-.622-1.4-1.4V17Z" fill="#000000" /></svg>
 

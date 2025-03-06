@@ -13,7 +13,7 @@ export const useUserActions = () => {
   }
 
   const removeUser = async () => {
-    await queryClient.removeQueries({ queryKey: ['user'] })
+    queryClient.removeQueries({ queryKey: ['user'] })
     dispatch(logout())
   }
 

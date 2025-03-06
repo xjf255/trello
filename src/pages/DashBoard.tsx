@@ -1,57 +1,96 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import '../styles/Dashboard.css'
-
-const BoardExample = [{
-  id: 1,
-  title: "Test",
-  description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo eligendi nam illum cumque totam ipsa quae velit illo laudantium explicabo, sed cupiditate, harum nemo vero quibusdam non saepe labore. Facilis?Possimus, vel. Voluptatum accusamus at numquam sunt dicta itaque incidunt, laboriosam aliquid. Illo voluptatibus facilis dignissimos doloremque, amet cupiditate fugit alias iure voluptates ex earum? Delectus reprehenderit atque consequatur aut.",
-  owner: "yo xd",
-  users: [
-    "lupe"
-  ],
-  comments: [
-    {
-      commentId: 1,
-      users: "lupe",
-      comment: "No pongas ni mierda entonces",
-      hora: "hace 1 min"
-    }
-  ]
-}]
+import { CommentIcon, IconUpload, LikeIcon } from '../components/Icons'
+import { useUserActions } from '../hooks/useUserActions'
+import { ShowTimer } from '../components/ShowTimer'
+import { InputFile } from '../components/InputFile'
+import { useBoardActions } from '../hooks/useBoardActions'
+import { Id } from '../types'
+import { useModal } from '../hooks/useModal'
+import { Modal } from '../components/Modal'
 
 export default function DashBoard() {
+  const { board, addComment, toogleLike } = useBoardActions()
+  const { user } = useUserActions()
+  const inputRef = useRef<HTMLInputElement | null>(null)
   const [showComments, setShowComments] = useState(false)
+  const { changeModalState } = useModal()
+
+  const handleAddComment = (e: React.KeyboardEvent<HTMLTextAreaElement>, boardId: Id) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      addComment(boardId, { comment: e.currentTarget.value, date: Date.now(), users: user?.user ?? "" })
+      e.currentTarget.value = ""
+    }
+  }
+
+  const handleLike = (boardId: Id) => {
+    toogleLike(boardId, user?.id ?? "")
+  }
+
+  const handleUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    console.log("upload", inputRef.current)
+    inputRef.current?.click()
+  }
+
+  const createBoard = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    changeModalState()
+  }
+
   return (
     <section className="dashboard">
       <header className="dashboard__header">
         <h4>Dashboard</h4>
-        <button>new Board</button>
+        <button onClick={createBoard}>new Board</button>
       </header>
       <ul className='dashboard__list'>
-        {BoardExample.map(todo => (
+        {board?.map(todo => (
           <article key={todo.id} className='dashboard__item'>
             <header>
               <div>
                 <h5>{todo.title}</h5>
                 <p>{todo.owner}</p>
+                <ShowTimer time={todo.date} />
               </div>
             </header>
-            <body>
+            <div>
               <p>{todo.description}</p>
-            </body>
+            </div>
             <footer>
-              <textarea name="newComment" placeholder='add comment...' />
-              {!showComments && todo.comments.length > 0 && <button className='btn--show' onClick={() => setShowComments(prev => !prev)}>load comments</button>}
-              {showComments && todo.comments.map(comment => (
-                <div key={comment.commentId}>
-                  <p>{comment.comment}</p>
-                  <p><strong>{comment.users}</strong></p>
+              <InputFile name='file' typesAccepted='*' customLoader ref={inputRef} />
+              <div>
+                <textarea name="newComment" placeholder='add comment...' onKeyUp={(e) => handleAddComment(e, todo.id)} />
+                <div>
+                  <i className={todo.likes.includes(user?.id ?? "") ? "liked" : ""} onClick={() => handleLike(todo.id)}><LikeIcon /></i>
+                  <span>{todo.likes.length}</span>
+                </div>
+                <div>
+                  <i onClick={() => setShowComments(prev => !prev)}><CommentIcon /></i>
+                  <span>{todo.comments.length}</span>
+                </div>
+                <i onClick={handleUploadClick}><IconUpload /></i>
+              </div>
+            </footer>
+            {showComments && <section className="comments">
+              {todo.comments.map(comment => (
+                <div className='comments__comment' key={comment.commentId}>
+                  <figure>
+                    <img src="https://via.placeholder.com/150" alt="profile" />
+                  </figure>
+                  <div className='comment__content'>
+                    <p className='comment__user'><strong>{comment.users}</strong></p>
+                    <p>{comment.comment}</p>
+                    <ShowTimer time={comment.date} />
+                  </div>
                 </div>
               ))}
-            </footer>
+            </section>}
           </article>
         ))}
       </ul>
+      <Modal isDashboard/>
     </section>
   )
 }
