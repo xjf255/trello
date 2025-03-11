@@ -43,16 +43,18 @@ export interface TaskState extends Task {
 
 interface IStateActions {
   task: TaskState[] | null
-  user: IUserStore | null
+  user: IUserStore
   board: IBoardWithId[] | null
 }
 
 export interface IComment {
-  commentId?: string
+  commentId: string
   date: number
-  users: string
+  users:Pick<IUsers, "user" | "avatar">
   comment: string
 }
+
+export type ICreateComment = Omit<IComment, "commentId">
 
 export interface ICreateBoard {
   title: string
@@ -61,12 +63,14 @@ export interface ICreateBoard {
   date: number
   users: string[]
 }
-export interface IBoard extends ICreateBoard{
+export interface IBoard extends ICreateBoard {
   likes: Id[]
   comments: IComment[]
 }
+
 export interface IBoardWithId extends IBoard {
   id: Id
+  status: BoardStatus
 }
 
 export type IBoardState = IBoardWithId[]

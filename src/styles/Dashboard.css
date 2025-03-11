@@ -1,15 +1,24 @@
 .dashboard {
-  height: 100dvh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: block;
   place-content: inherit;
   padding: 20px 10px;
 
   &>.dashboard__header {
     padding: 0;
-    margin: 0;
 
+    & > span {
+      display: flex;
+      align-items: center;
+    }
+
+    .select{
+      width: 140px;
+    }
+    
     & h4 {
+      margin: 4px 0;
       font-size: 30px;
     }
 
@@ -21,7 +30,6 @@
   }
 
   .dashboard__list {
-    background-color: red;
     display: flex;
   }
 
@@ -32,6 +40,10 @@
     flex-direction: column;
     gap: 20px;
     border-radius: 10px;
+
+    .dashboard__item--content {
+      display: inline;
+    }
 
     & * {
       margin: 0;
@@ -77,18 +89,16 @@
         }
 
         i {
-          cursor: pointer;
-
           &>svg:hover {
             opacity: .7;
           }
 
           &.liked {
             svg {
-              fill: red;
+              fill: rgb(210, 0, 0);
 
               path {
-                stroke: red;
+                stroke: rgb(210, 0, 0);
               }
             }
           }
@@ -108,13 +118,13 @@
 
   .comments {
     padding: 10px 0;
-    background: #a6fb98;
+    background: #efefef;
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 20px;
 
-    & > .comments__comment {
+    &>.comments__comment {
       width: 100%;
       display: flex;
       justify-content: start;
@@ -123,19 +133,20 @@
       align-items: center;
       position: relative;
 
-      & > figure {
+      &>figure {
         width: 50px;
         height: 50px;
         border-radius: 50%;
         object-fit: cover;
       }
 
-      & > .comment__content {
+      &>.comment__content {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: start;
 
-        & > * {
+        &>* {
           text-align: start;
           margin: 0;
           padding: 0;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { PATHS } from "../../utils/constant"
-import { useLocation, useNavigate } from "react-router"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useUserActions } from "../../hooks/useUserActions"
 import { ReturnArrow } from "../../components/Icons"
 

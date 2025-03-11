@@ -1,3 +1,5 @@
+import { BoardStatus } from "../type"
+
 export const PATHS = {
   default: '/',
   verification: {
@@ -17,6 +19,13 @@ export const PATHS = {
   },
   all: '*'
 }
+
+export const optionsStatusBoard = [
+  { value: '*', label: "All" },
+  { value: BoardStatus.PENDING, label: "Pending" },
+  { value: BoardStatus.IN_PROGRESS, label: "In Progress" },
+  { value: BoardStatus.DONE, label: "Done" }
+]
 
 export const TASK_COLORS = [
   "FF3B30", // Rojo brillante 🔴

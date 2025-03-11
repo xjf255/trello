@@ -1,0 +1,14 @@
+p.text {
+  text-align: start;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+a.see--more {
+  cursor: pointer;
+  color: rgb(4, 4, 34);
+  font-weight: 600;
+}

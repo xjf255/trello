@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { IComment, ICreateBoard, Id, IStateActions } from "../types"
+import { ICreateBoard, ICreateComment, Id, IStateActions } from "../types"
 import { createBoard, removeBoard, updateBoard } from "../context/Dashboard/sliceBoard"
 
 export const useBoardActions = () => {
@@ -19,7 +19,7 @@ export const useBoardActions = () => {
     return board.find((board) => board.id === boardId)
   }
 
-  const addComment = (boardId: Id, comment: IComment) => {
+  const addComment = (boardId: Id, comment: ICreateComment) => {
     const currentBoard = getBoard(boardId)
     if (currentBoard) {
       const updatedBoard = { ...currentBoard, comments: [...currentBoard.comments, { commentId: crypto.randomUUID(), ...comment }] }

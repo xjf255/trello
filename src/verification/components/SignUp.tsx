@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 import { PATHS } from "../../utils/constant"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { IUserSignUp } from "../../types.ts"

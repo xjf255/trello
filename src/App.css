@@ -25,6 +25,11 @@ input {
   background-color: #ffe;
 }
 
+i {
+  cursor: pointer;
+  display: inline-block;
+}
+
 .auth__toggle {
   display: flex;
   align-items: center;
@@ -42,7 +47,7 @@ input {
 
 span {
   display: flex;
-  gap: 40px;
+  gap: 10px;
 }
 
 main {
@@ -100,10 +105,6 @@ header {
   padding-inline: 30px;
   align-items: center;
   margin: 20px;
-
-  & i {
-    cursor: pointer;
-  }
 
   & figure {
     cursor: pointer;

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router"
+import { NavLink, Outlet } from "react-router-dom"
 import { PATHS } from "../utils/constant"
 
 export default function Home() {

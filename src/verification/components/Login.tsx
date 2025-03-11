@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { PATHS } from "../../utils/constant"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { RequestError } from "../../utils/customErrors/requestErrors"
 import { ValidationError } from "../../utils/customErrors/validationErrors"
@@ -42,7 +42,6 @@ export const Login = () => {
         password
       })
     })
-    console.log(response.status)
     if (response.status === 401) {
       toast.warning("Usuario inactivo, activando cuenta...")
       await reactiveAccount()
@@ -50,7 +49,7 @@ export const Login = () => {
       location.reload()
     }
 
-    if (!response.ok) throw new RequestError("try again later")
+    if (!response.ok) throw new RequestError(JSON.stringify(await response.json()))
     return response.json()
   }
 
@@ -60,9 +59,10 @@ export const Login = () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
       navigate(PATHS.user.workerspace.dashboard)
     },
-    onError: () => {
+    onError: (e) => {
       queryClient.setQueryData(['user'], undefined)
-      throw new RequestError("try again later")
+      const { message } = JSON.parse(e.message)
+      toast.error(message)
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] })

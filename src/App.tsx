@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react'
 import './App.css'
-import { Navigate, Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { PATHS } from './utils/constant'
 import { Login } from './verification/components/Login'
 import { SignUp } from './verification/components/SignUp'
@@ -34,7 +34,7 @@ export default function App() {
     retry: false
   })
 
-  const isAuth = !!user
+  const isAuth = !!user?.id
 
   useEffect(() => {
     if (data && !user) addUser({ ...data })
@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <>
-      <Toaster />
+      <Toaster duration={6000} richColors/>
       <Suspense fallback={<h1>Cargando...</h1>}>
         <Routes>
           <Route
