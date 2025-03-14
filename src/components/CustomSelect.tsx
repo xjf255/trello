@@ -6,13 +6,13 @@ interface OptionType {
   label: string
 }
 
-export function CustomSelect({ options, disable=false }: { options: OptionType[], disable?: boolean }) {
+export function CustomSelect({ options, disable = false }: { options: OptionType[], disable?: boolean }) {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(options[0])
 
-  const handleChange = (
-    newValue: SingleValue<OptionType>,
-  ) => {
+
+  const handleChange = (newValue: SingleValue<OptionType>,) => {
     setSelectedOption(newValue)
+    console.log(newValue)
   }
 
   return (

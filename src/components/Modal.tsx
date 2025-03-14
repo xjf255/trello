@@ -7,6 +7,7 @@ import { TASK_COLORS } from '../utils/constant'
 import { useTaskActions } from '../hooks/useTaskActions'
 import { useBoardActions } from '../hooks/useBoardActions'
 import { useUserActions } from '../hooks/useUserActions'
+import { ModalContext } from '../context/modal/sliceState'
 
 const DEFAULT_FORM = {
   taskTitle: "",
@@ -20,7 +21,7 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
   const { user } = useUserActions()
   const { createNewBoard } = useBoardActions()
   const [defaultFormValues, setDefaultFormValues] = useState(DEFAULT_FORM)
-  const { isOpen, changeModalState } = useModal()
+  const { isOpen, changeModalState } = useModal(ModalContext)
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

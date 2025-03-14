@@ -53,10 +53,15 @@ export const DoneIcon = () => <svg width="24px" height="24px" viewBox="0 0 24 24
 </svg>
 
 export const EditIcon = () => <svg width="24px" height="24px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" >
-  <path d="M0 0h48v48H0z" fill="none"/>
+  <path d="M0 0h48v48H0z" fill="none" />
   <g id="Shopicon">
-	  <circle cx="24" cy="24" r="5"/>
-	  <circle cx="24" cy="11" r="5"/>
-	  <circle cx="24" cy="37" r="5"/>
+    <circle cx="24" cy="24" r="5" />
+    <circle cx="24" cy="11" r="5" />
+    <circle cx="24" cy="37" r="5" />
   </g>
+</svg>
+
+export const Peak = () => <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 10 10">
+  <rect width="10" height="10" x="0" y="0" id="canvas" style={{ fill: "none", stroke: "none", visibility: "hidden" }} />
+  <path d="M 2,8 9,8 9,2 z" style={{ fill: "#dfdddd", fillOpacity: 1, stroke: "none" }} />
 </svg>

@@ -52,11 +52,11 @@ const dashboardSlice = createSlice({
     updateBoard: (state, action: PayloadAction<IBoardWithId>) => {
       const BoardId = state.findIndex(Board => Board.id === action.payload.id)
       if (BoardId !== -1) {
-        state[BoardId] = action.payload
+        state.splice(BoardId, 1, action.payload)
       }
     }
   },
 });
 
 export default dashboardSlice.reducer;
-export const { createBoard, removeBoard, updateBoard } = dashboardSlice.actions;
+export const { createBoard, removeBoard, updateBoard} = dashboardSlice.actions;

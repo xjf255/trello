@@ -1,4 +1,6 @@
+import { ClockIcon, DoneIcon, PendientIcon } from "../components/Icons"
 import { BoardStatus } from "../type"
+import { ItemStatusBoard } from "../types"
 
 export const PATHS = {
   default: '/',
@@ -12,7 +14,7 @@ export const PATHS = {
   user: {
     settings: '/settings',
     workerspace: {
-      documents: "/documents", 
+      documents: "/documents",
       calendar: '/calendar',
       dashboard: '/dashboard'
     }
@@ -20,12 +22,14 @@ export const PATHS = {
   all: '*'
 }
 
-export const optionsStatusBoard = [
-  { value: '*', label: "All" },
-  { value: BoardStatus.PENDING, label: "Pending" },
-  { value: BoardStatus.IN_PROGRESS, label: "In Progress" },
-  { value: BoardStatus.DONE, label: "Done" }
+export const STATUS_BOARD: ItemStatusBoard[] = [
+  { value: null, label: "All", icon: null },
+  { value: BoardStatus.PENDING, label: "Pending", icon: PendientIcon },
+  { value: BoardStatus.IN_PROGRESS, label: "In Progress", icon: ClockIcon },
+  { value: BoardStatus.DONE, label: "Done", icon: DoneIcon }
 ]
+
+export const STATUS_SELECTED_BOARD = STATUS_BOARD
 
 export const TASK_COLORS = [
   "FF3B30", // Rojo brillante 🔴
@@ -38,6 +42,6 @@ export const TASK_COLORS = [
   "FF2D55"  // Rosa neón 💖
 ]
 
-export const DAYS = ["Sunday","Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday"]
+export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
-export const MONTHS = ["January","February","March", "April","May","June","July","August","September","October","November","December"]
+export const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]

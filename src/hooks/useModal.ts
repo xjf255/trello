@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { ModalContext } from "../context/modal/sliceState";
+import { ModalContextType } from "../types";
 
-export function useModal() {
-  const context = useContext(ModalContext);
-  if (!context) {
+export function useModal(context:React.Context<ModalContextType | undefined>) {
+  const modalContext = useContext(context)
+  if (!modalContext) {
     throw new Error("useModal debe usarse dentro de un ModalProvider");
   }
-  return context;
+  return modalContext;
 }

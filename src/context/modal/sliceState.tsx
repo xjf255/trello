@@ -1,22 +1,14 @@
-import { createContext, ReactNode, useState } from "react";
+import { ModalContextType } from "../../types";
+import { createGenericContext } from "../../utils/createGenericContex";
 
-interface ModalContextType {
-  isOpen: boolean
-  changeModalState: () => void
-}
+const [ModalContext, ModalProvider] = createGenericContext<ModalContextType>({
+  isOpen: false,
+  changeModalState: () => { }
+})
 
-export const ModalContext = createContext<ModalContextType | undefined>(undefined)
+const [ConfigContext, ConfigProvider] = createGenericContext<ModalContextType>({
+  isOpen: false,
+  changeModalState: () => { }
+})
 
-export function ModalProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const changeModalState = () => {
-    setIsOpen(prev => !prev)
-  }
-
-  return (
-    <ModalContext.Provider value={{ isOpen, changeModalState }}>
-      {children}
-    </ModalContext.Provider>
-  )
-}
+export { ModalContext, ModalProvider, ConfigContext, ConfigProvider }

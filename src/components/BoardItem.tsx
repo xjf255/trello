@@ -1,18 +1,22 @@
-import { useRef, useState } from "react";
-import { IBoardWithId, IComment, Id } from "../types";
+import { createElement, useRef, useState } from "react";
+import { IBoardWithId, IComment, Id, ItemStatusBoard } from "../types";
 import { useUserActions } from "../hooks/useUserActions";
 import { useBoardActions } from "../hooks/useBoardActions";
 import { ShowTimer } from "./ShowTimer";
 import { InputFile } from "./InputFile";
-import { ClockIcon, CommentIcon, DoneIcon, EditIcon, IconUpload, LikeIcon, PendientIcon } from "./Icons";
+import { CommentIcon, IconUpload, LikeIcon } from "./Icons";
 import { Texts } from "./Texts";
-import { optionsStatusBoard } from "../utils/constant";
+import { STATUS_BOARD } from "../utils/constant";
+import ConfigBoard from "./ConfigBoard";
+import { useModal } from "../hooks/useModal";
+import { ConfigContext } from "../context/modal/sliceState";
 
 export default function BoardItem(boardItem: IBoardWithId) {
-  const { addComment, toogleLike } = useBoardActions()
+  const { addComment, toggleLike } = useBoardActions()
   const { user } = useUserActions()
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [showComments, setShowComments] = useState(false)
+  const { changeModalState, isOpen } = useModal(ConfigContext)
 
   const handleAddComment = (e: React.KeyboardEvent<HTMLTextAreaElement>, boardId: Id) => {
     if (e.key === "Enter") {
@@ -23,13 +27,17 @@ export default function BoardItem(boardItem: IBoardWithId) {
   }
 
   const handleLike = (boardId: Id) => {
-    toogleLike(boardId, user.id)
+    toggleLike(boardId, user.id)
   }
 
   const handleUploadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     console.log("upload", inputRef.current)
     inputRef.current?.click()
+  }
+
+  const handleShowConfigModal = () => {
+    changeModalState()
   }
 
   return (
@@ -41,10 +49,18 @@ export default function BoardItem(boardItem: IBoardWithId) {
           <ShowTimer time={boardItem.date} />
         </div>
         <div>
-          {boardItem.status === optionsStatusBoard[2].value && <i><ClockIcon /></i>}
-          {boardItem.status === optionsStatusBoard[3].value && <i><DoneIcon /></i>}
-          {boardItem.status === optionsStatusBoard[1].value && <i><PendientIcon /></i>}
-          {boardItem.owner === user.user && <i><EditIcon /></i>}
+          <i onClick={handleShowConfigModal}>
+            {
+              (() => {
+                const iconComponent = STATUS_BOARD.find(
+                  (status: ItemStatusBoard) => status.value === boardItem.status
+                )?.icon;
+
+                return iconComponent ? createElement(iconComponent) : null;
+              })()
+            }
+          </i>
+          {isOpen && <ConfigBoard idBoard={boardItem.id} items={STATUS_BOARD} selected={boardItem.status} />}
         </div>
       </header>
       <span className="dashboard__item--content">

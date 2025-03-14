@@ -3,8 +3,8 @@ import { ICreateBoard, ICreateComment, Id, IStateActions } from "../types"
 import { createBoard, removeBoard, updateBoard } from "../context/Dashboard/sliceBoard"
 
 export const useBoardActions = () => {
-  const dispatch = useDispatch()
   const board = useSelector((state: IStateActions) => state.board)
+  const dispatch = useDispatch()
 
   const createNewBoard = (newBoard: ICreateBoard) => {
     dispatch(createBoard(newBoard))
@@ -27,7 +27,7 @@ export const useBoardActions = () => {
     }
   }
 
-  const toogleLike = (boardId: Id, userId: Id) => {
+  const toggleLike = (boardId: Id, userId: Id) => {
     const currentBoard = getBoard(boardId)
     if (currentBoard) {
       const updatedBoard = { ...currentBoard, likes: currentBoard.likes.includes(userId) ? currentBoard.likes.filter((user) => user !== userId) : [...currentBoard.likes, userId] }
@@ -35,5 +35,13 @@ export const useBoardActions = () => {
     }
   }
 
-  return { board, createNewBoard, removeBoards, addComment, toogleLike }
+  const changeStatus = (boardId: Id, newStatus: string) => {
+    const currentBoard = getBoard(boardId)
+    if (currentBoard) {
+      const updatedBoard = { ...currentBoard, status: newStatus }
+      dispatch(updateBoard(updatedBoard))
+    }
+  }
+
+  return { board, createNewBoard, removeBoards, addComment, toggleLike, changeStatus }
 }

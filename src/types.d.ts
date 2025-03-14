@@ -9,6 +9,10 @@ export interface IUsers {
   password?: string
   avatar: string | File
 }
+interface ModalContextType {
+  isOpen: boolean
+  changeModalState: () => void
+}
 export interface IUserStore extends IUsers {
   exp?: number
   iat?: number
@@ -74,3 +78,9 @@ export interface IBoardWithId extends IBoard {
 }
 
 export type IBoardState = IBoardWithId[]
+
+interface ItemStatusBoard {
+  value: BoardStatus | null
+  label: string
+  icon: React.FC | null
+}
