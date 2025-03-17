@@ -3,17 +3,11 @@ import { createPortal } from 'react-dom'
 import { CloseModal } from './Icons'
 import '../styles/Modal.css'
 import { useModal } from '../hooks/useModal'
-import { TASK_COLORS } from '../utils/constant'
+import { DEFAULT_FORM, TASK_COLORS } from '../utils/constant'
 import { useTaskActions } from '../hooks/useTaskActions'
 import { useBoardActions } from '../hooks/useBoardActions'
 import { useUserActions } from '../hooks/useUserActions'
 import { ModalContext } from '../context/modal/sliceState'
-
-const DEFAULT_FORM = {
-  taskTitle: "",
-  color: "",
-  taskDescription: ""
-}
 
 export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
   const [color, setColor] = useState("")

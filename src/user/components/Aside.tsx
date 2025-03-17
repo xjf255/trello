@@ -8,7 +8,7 @@ export default function Aside() {
       <ul>
         {Object.entries(PATHS.user.workerspace).map(([space, path]) => {
           return (
-            <li key={space}>
+            <li key={space} aria-current="location">
               <NavLink to={path}>{space}</NavLink>
             </li>
           )

@@ -9,10 +9,7 @@ interface Props {
   customFnUpload?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const InputFile = forwardRef<HTMLInputElement, Props>(
-  (
-    { name, typesAccepted, customLoader = false, customFnUpload }: Props, ref
-  ) => {
+export const InputFile = forwardRef<HTMLInputElement, Props>(({ name, typesAccepted, customLoader = false, customFnUpload }: Props, ref) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
     const [fileName, setFileName] = useState<string | null>(null)
 
@@ -48,7 +45,7 @@ export const InputFile = forwardRef<HTMLInputElement, Props>(
           ref={(node) => {
             inputRef.current = node
             if (typeof ref === "function") {
-              ref(node) 
+              ref(node)
             } else if (ref) {
               (ref as React.MutableRefObject<HTMLInputElement | null>).current =
                 node

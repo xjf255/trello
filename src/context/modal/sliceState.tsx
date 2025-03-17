@@ -6,9 +6,4 @@ const [ModalContext, ModalProvider] = createGenericContext<ModalContextType>({
   changeModalState: () => { }
 })
 
-const [ConfigContext, ConfigProvider] = createGenericContext<ModalContextType>({
-  isOpen: false,
-  changeModalState: () => { }
-})
-
-export { ModalContext, ModalProvider, ConfigContext, ConfigProvider }
+export { ModalContext, ModalProvider}

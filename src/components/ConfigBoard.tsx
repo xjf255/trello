@@ -3,27 +3,21 @@ import { useBoardActions } from "../hooks/useBoardActions"
 import { BoardStatus } from "../type"
 import { ItemStatusBoard } from "../types"
 import { Peak } from "./Icons"
-import { useModal } from "../hooks/useModal"
-import { ConfigContext } from "../context/modal/sliceState"
 
 interface ConfigBoardProps {
   items: ItemStatusBoard[]
   selected: string
   idBoard: string
+  changeModalState: (value:boolean) => void
 }
 
-export default function ConfigBoard({
-  items,
-  selected,
-  idBoard,
-}: ConfigBoardProps) {
+export default function ConfigBoard({ items, selected, idBoard, changeModalState }: ConfigBoardProps) {
   const { changeStatus } = useBoardActions()
-  const { changeModalState } = useModal(ConfigContext)
 
   const handleClick = (newStatus: BoardStatus) => {
-    if (newStatus === selected) return changeModalState()
+    if (newStatus === selected) return changeModalState(false)
     changeStatus(idBoard, newStatus)
-    changeModalState()
+    changeModalState(false)
   }
 
   return (
@@ -32,7 +26,7 @@ export default function ConfigBoard({
       <div className="body__config">
         <ul>
           {items.map((item, index) => {
-            if(item.icon === null) return
+            if (item.icon === null) return
             return (
               <li
                 key={index}

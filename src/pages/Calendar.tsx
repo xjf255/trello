@@ -6,6 +6,7 @@ import { useModal } from "../hooks/useModal"
 import { useTaskActions } from "../hooks/useTaskActions"
 import { IDate } from "../types"
 import { Modal } from "../components/Modal"
+import { ModalContext } from "../context/modal/sliceState"
 
 enum typeChangeMonth {
   next = "next",
@@ -15,7 +16,7 @@ enum typeChangeMonth {
 export default function Calendar() {
   const currentDate = new Date()
   const { getTasks, tasks: allTasks } = useTaskActions()
-  const { changeModalState } = useModal()
+  const { changeModalState } = useModal(ModalContext)
 
   const [date, setDate] = useState<IDate>(() => {
     const month = currentDate.getMonth()
@@ -65,7 +66,7 @@ export default function Calendar() {
   }
 
   // Get the days of the month with proper alignment
-  const days = [...Array(date.startsOn).fill(null), ...Array(date.daysOfMonth).keys()]
+  const days = useMemo(() => [...Array(date.startsOn).fill(null), ...Array(date.daysOfMonth).keys()], [date.startsOn, date.daysOfMonth])
   const daysCalendar = days.reduce((rows, cur, index) => {
     if (index % 7 === 0) rows.push([])
     rows[rows.length - 1].push(cur)

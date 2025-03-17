@@ -31,6 +31,12 @@ export const STATUS_BOARD: ItemStatusBoard[] = [
 
 export const STATUS_SELECTED_BOARD = STATUS_BOARD
 
+export const DEFAULT_FORM = {
+  taskTitle: "",
+  color: "",
+  taskDescription: ""
+}
+
 export const TASK_COLORS = [
   "FF3B30", // Rojo brillante 🔴
   "FF9500", // Naranja intenso 🟠

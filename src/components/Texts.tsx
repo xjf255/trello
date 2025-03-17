@@ -1,32 +1,30 @@
-import { useId } from "react"
+import React, { useId, useState } from "react"
 import "../styles/Text.css"
 
-export function Texts({text}: {text:string}) {
+export const Texts = React.memo(({ text }: { text: string }) => {
+  const [isExpanded, setIsExpanded] = useState(false)
   const id = useId()
-  if (text.length < 100) {
-    return (
-      <p>{text}</p>
-    )
+
+  const handleSeeMore = () => {
+    setIsExpanded((prev) => !prev)
   }
 
-  const handleSeeMore = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const $p = document.getElementById(id)
-    if ($p) {
-      if (e.currentTarget.textContent === "ver más") {
-        $p.style.display = "block"
-        e.currentTarget.textContent = "ver menos"
-      }
-      else {
-        $p.style.display = "-webkit-box"
-        e.currentTarget.textContent = "ver más"
-      }
-    }
+  if (text.length < 100) {
+    return <p>{text}</p>
   }
 
   return (
     <>
-      <p className="text" id={id}>{text}</p>
-      <a className="see--more" onClick={handleSeeMore}>ver más</a>
+      <p className={`text ${isExpanded ? "expanded" : ""}`} id={id}>{text}</p>
+      <button
+        className="see--more"
+        onClick={handleSeeMore}
+        aria-expanded={isExpanded}
+        aria-controls={id}
+        aria-label={isExpanded ? "Ver menos" : "Ver más"}
+      >
+        {isExpanded ? "ver menos" : "ver más"}
+      </button>
     </>
   )
-}
+})

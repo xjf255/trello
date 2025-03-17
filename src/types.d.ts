@@ -54,7 +54,7 @@ interface IStateActions {
 export interface IComment {
   commentId: string
   date: number
-  users:Pick<IUsers, "user" | "avatar">
+  users: Pick<IUsers, "user" | "avatar">
   comment: string
 }
 

@@ -17,6 +17,7 @@ const Calendar = lazy(() => import('./pages/Calendar'))
 const UserConfig = lazy(() => import('./user/UserConfig'))
 const FactorAuthentication = lazy(() => import('./verification/components/FactorAuthentication'))
 const ProtectedRoutes = lazy(() => import('./components/ProtectedRoutes'))
+const Documents = lazy(() => import('./pages/Documents'))
 
 export default function App() {
   const { user, addUser } = useUserActions()
@@ -42,7 +43,7 @@ export default function App() {
 
   return (
     <>
-      <Toaster duration={6000} richColors/>
+      <Toaster duration={6000} richColors />
       <Suspense fallback={<h1>Cargando...</h1>}>
         <Routes>
           <Route
@@ -62,6 +63,7 @@ export default function App() {
             <Route path={PATHS.user.workerspace.dashboard} element={<DashBoard />} />
             <Route path={PATHS.user.settings} element={<UserConfig />} />
             <Route path={PATHS.user.workerspace.calendar} element={<Calendar />} />
+            <Route path={PATHS.user.workerspace.documents} element={<Documents />} />
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>

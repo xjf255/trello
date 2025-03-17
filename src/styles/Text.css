@@ -3,12 +3,24 @@ p.text {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
 }
 
-a.see--more {
+.text.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
+button.see--more {
   cursor: pointer;
   color: rgb(4, 4, 34);
   font-weight: 600;
+  border: none;
+  padding: 2px;
+  background-color: transparent;
+
+  &:focus{
+    box-shadow: none;
+  }
 }
