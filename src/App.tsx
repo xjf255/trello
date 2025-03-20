@@ -8,6 +8,8 @@ import { useQuery } from '@tanstack/react-query'
 import { ResetPassword } from './verification/components/ResetPassword'
 import { useUserActions } from './hooks/useUserActions'
 import { Toaster } from 'sonner'
+import { Document } from './components/Document'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const Home = lazy(() => import('./home/Home'))
 const Verification = lazy(() => import('./verification/Verification'))
@@ -42,7 +44,7 @@ export default function App() {
   }, [data, addUser, user])
 
   return (
-    <>
+    <ErrorBoundary>
       <Toaster duration={6000} richColors />
       <Suspense fallback={<h1>Cargando...</h1>}>
         <Routes>
@@ -64,10 +66,11 @@ export default function App() {
             <Route path={PATHS.user.settings} element={<UserConfig />} />
             <Route path={PATHS.user.workerspace.calendar} element={<Calendar />} />
             <Route path={PATHS.user.workerspace.documents} element={<Documents />} />
+            <Route path={PATHS.user.workerspace.documents+"/:documentId"} element={<Document />} />
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>
       </Suspense>
-    </>
+    </ErrorBoundary>
   )
 }

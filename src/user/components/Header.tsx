@@ -20,8 +20,8 @@ export default function Header() {
   }, [user, navigate, redirecting])
 
   useEffect(() => {
-    if (location.pathname !== PATHS.user.workerspace.dashboard && isDashboard) return setIsDashboard(false)
-    return setIsDashboard(true)
+    if (location.pathname !== PATHS.user.workerspace.dashboard || isDashboard) return setIsDashboard(false)
+    setIsDashboard(true)
   }, [location.pathname])
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {

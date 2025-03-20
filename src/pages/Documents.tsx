@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom";
 import { Plus } from "../components/Icons";
 import '../styles/Document.css'
+import { PATHS } from "../utils/constant";
 
 export default function Documents() {
+  const newDocument = crypto.randomUUID()
   return (
     <section className="documents">
       <ul className="documents__list">
         <li>
-          <div className="documents__new">
+          <Link className="documents__new" to={PATHS.user.workerspace.documents + `/${newDocument}`} viewTransition>
             <Plus />
-          </div>
-          New document
+          </Link>
         </li>
       </ul>
     </section>
