@@ -52,6 +52,11 @@ export default function DashBoard() {
         <button onClick={createBoard}>New Board</button>
       </header>
       <ul className="dashboard__list">
+        {board?.length === 0 && (
+          <li className="dashboard__list--empty">
+            <h4>There are no tasks in this section</h4>
+          </li>
+        )}
         {board?.map(todo => (
           <BoardItem key={todo.id} {...todo} />
         ))}

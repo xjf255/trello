@@ -30,7 +30,6 @@ tbody {
     width: 100px;
     height: 100%;
     overflow: hidden;
-    height: 100px;
     font-weight: 600;
 
     ul {
@@ -44,7 +43,11 @@ tbody {
     }
 
     & .today {
-      padding: 6px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-wrap: nowrap;
       border-radius: 50%;
       background-color: #a4d3e0;
     }

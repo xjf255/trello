@@ -15,7 +15,7 @@ export const BoardInteractive = forwardRef<HTMLInputElement, Props>(({ boardItem
   const [showComments, setShowComments] = useState(false)
 
   const handleAddComment = (e: React.KeyboardEvent<HTMLTextAreaElement>, boardId: Id) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
       e.preventDefault()
       addComment(boardId, { comment: e.currentTarget.value, date: Date.now(), users: { user: user.user, avatar: user.avatar } })
       e.currentTarget.value = ""
@@ -41,7 +41,7 @@ export const BoardInteractive = forwardRef<HTMLInputElement, Props>(({ boardItem
     <footer>
       <InputFile name='file' typesAccepted='*' customLoader ref={ref} />
       <div>
-        <textarea name="newComment" placeholder='add comment...' onKeyUp={(e) => handleAddComment(e, boardItem.id)} />
+        <textarea name="newComment" placeholder='add comment...' onKeyDown={(e) => handleAddComment(e, boardItem.id)} />
         <div>
           <i className={boardItem.likes.includes(user.id) ? "liked" : ""} onClick={() => handleLike(boardItem.id)}><LikeIcon /></i>
           <span>{boardItem.likes.length}</span>

@@ -3,12 +3,13 @@ import { PATHS } from "../../utils/constant"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useUserActions } from "../../hooks/useUserActions"
 import { ReturnArrow } from "../../components/Icons"
+import ModalCloseSession from "../../components/ModalCloseSession"
 
 export default function Header() {
   const location = useLocation()
   const [isDashboard, setIsDashboard] = useState(true)
   const navigate = useNavigate()
-  const { user, removeUser } = useUserActions()
+  const { user } = useUserActions()
   const [redirecting, setRedirecting] = useState(false)
 
   useEffect(() => {
@@ -20,29 +21,10 @@ export default function Header() {
   }, [user, navigate, redirecting])
 
   useEffect(() => {
-    if (location.pathname !== PATHS.user.workerspace.dashboard || isDashboard) return setIsDashboard(false)
+    console.log(location.pathname)
+    if (location.pathname !== PATHS.user.workerspace.dashboard && isDashboard) return setIsDashboard(false)
     setIsDashboard(true)
   }, [location.pathname])
-
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-
-    try {
-      const response = await fetch("http://localhost:1234/verification/logout", {
-        method: "POST",
-        credentials: "include",
-      })
-
-      if (response.ok) {
-        console.log("Logout exitoso, removiendo usuario...")
-        await removeUser()
-      } else {
-        console.error("Error en logout:", response.statusText)
-      }
-    } catch (error) {
-      console.error("Error de red:", error)
-    }
-  }
 
   const changePage = (URL: string) => {
     navigate(URL)
@@ -56,7 +38,7 @@ export default function Header() {
         <figure onClick={() => changePage(PATHS.user.settings)}>
           {user?.avatar && <img className="user__avatar" src={user.avatar as string} alt={user.user || "User"} />}
         </figure>
-        <button onClick={handleClick}>Log Out</button>
+        <ModalCloseSession />
       </span>
     </header>
   )

@@ -8,7 +8,7 @@ export function Document() {
 
   const [headers, setHeaders] = useState(initialHeader)
   const [rows, setRows] = useState(initialRows)
-  const [title, setTitle] = useState("Title Document")
+  const [title, setTitle] = useState("Document title")  
 
   const handleHeaderChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const newHeaders = [...headers]
@@ -42,7 +42,7 @@ export function Document() {
         <input
           type="text"
           className="document__title"
-          value={title}
+          defaultValue={title}
           placeholder="Document title"
           onChange={handleTitleChange}
         />

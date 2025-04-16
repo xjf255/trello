@@ -13,8 +13,8 @@ export default function ProtectedRoutes({ isAuthenticated = false }: Props) {
   </>
   return (
     <ModalProvider>
-      <Header />
       <main>
+        <Header />
         <Aside />
         <Outlet />
       </main>

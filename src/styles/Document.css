@@ -46,18 +46,19 @@
   }
 
   section {
+    position: relative;
+
     .table-container {
-      width: 100%;
-      height: 100%;
+      width: 98%;
+      height: 380px;
       overflow: auto; 
-      position: relative;
       border: 1px solid #ccc;
     }
 
     table {
       background-color: rgb(221, 220, 218);
       overflow-x: scroll;
-      overflow-y: auto;
+      overflow-y: scroll;
       border-collapse: collapse;
       margin: 0;
     }
@@ -93,6 +94,10 @@
       margin: 0;
     }
 
+    tr{
+      height: auto;
+    }
+
     td {
       padding: 2px;
       vertical-align: middle;
@@ -103,6 +108,11 @@
     .column--add {
       position: absolute;
       right: 0px;
+    }
+
+    .row--add{
+      position: absolute;
+      bottom: -30px;
     }
 
   }
