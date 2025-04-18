@@ -14,14 +14,12 @@ export default function Header() {
 
   useEffect(() => {
     if (!user && !redirecting) {
-      console.log("Usuario no autenticado, redirigiendo...")
       setRedirecting(true)
       navigate(PATHS.verification.login)
     }
   }, [user, navigate, redirecting])
 
   useEffect(() => {
-    console.log(location.pathname)
     if (location.pathname !== PATHS.user.workerspace.dashboard && isDashboard) return setIsDashboard(false)
     setIsDashboard(true)
   }, [location.pathname])

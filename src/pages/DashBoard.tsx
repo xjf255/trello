@@ -40,28 +40,30 @@ export default function DashBoard() {
 
   return (
     <section className="dashboard">
-      <header className="dashboard__header">
-        <span>
-          <h4>Dashboard</h4>
-          <CustomSelect
-            options={STATUS_BOARD}
-            updateBoard={filterBoard}
-            initialState={stateSelected}
-          />
-        </span>
-        <button onClick={createBoard}>New Board</button>
-      </header>
-      <ul className="dashboard__list">
-        {board?.length === 0 && (
-          <li className="dashboard__list--empty">
-            <h4>There are no tasks in this section</h4>
-          </li>
-        )}
-        {board?.map(todo => (
-          <BoardItem key={todo.id} {...todo} />
-        ))}
-      </ul>
-      <Modal isDashboard />
+      <div className="dashboard__body">
+        <header className="dashboard__header">
+          <span>
+            <h4>Dashboard</h4>
+            <CustomSelect
+              options={STATUS_BOARD}
+              updateBoard={filterBoard}
+              initialState={stateSelected}
+            />
+          </span>
+          <button onClick={createBoard}>New Board</button>
+        </header>
+        <ul className="dashboard__list">
+          {board?.length === 0 && (
+            <li className="dashboard__list--empty">
+              <h4>There are no tasks in this section</h4>
+            </li>
+          )}
+          {board?.map(todo => (
+            <BoardItem key={todo.id} {...todo} />
+          ))}
+        </ul>
+        <Modal isDashboard />
+      </div>
     </section>
-  );
+  )
 }
