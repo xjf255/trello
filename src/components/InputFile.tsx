@@ -1,4 +1,4 @@
-import { IconUpload, Trash } from "./Icons"
+import { CloudUpload, Trash } from "lucide-react"
 import "../styles/InputFile.css"
 import { useRef, useState, forwardRef } from "react"
 
@@ -60,7 +60,7 @@ export const InputFile = forwardRef<HTMLInputElement, Props>(({ name, typesAccep
         />
         {!customLoader && (
           <button onClick={handleUploadClick}>
-            <IconUpload /> Upload File
+            <CloudUpload /> Upload File
           </button>
         )}
         {fileName && (

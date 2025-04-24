@@ -2,8 +2,8 @@ import { forwardRef, useState } from "react"
 import { IBoardWithId, Id, IUsers } from "../types"
 import { useBoardActions } from "../hooks/useBoardActions"
 import { InputFile } from "./InputFile"
-import { CommentIcon, IconUpload, LikeIcon } from "./Icons"
 import { Comments } from "./Comments"
+import { CloudUpload, Heart, MessageCircle } from "lucide-react"
 
 interface Props {
   boardItem: IBoardWithId
@@ -43,14 +43,14 @@ export const BoardInteractive = forwardRef<HTMLInputElement, Props>(({ boardItem
       <div>
         <textarea name="newComment" placeholder='add comment...' onKeyDown={(e) => handleAddComment(e, boardItem.id)} />
         <div>
-          <i className={boardItem.likes.includes(user.id) ? "liked" : ""} onClick={() => handleLike(boardItem.id)}><LikeIcon /></i>
+          <i className={boardItem.likes.includes(user.id) ? "liked" : ""} onClick={() => handleLike(boardItem.id)}><Heart /></i>
           <span>{boardItem.likes.length}</span>
         </div>
         <div>
-          <i onClick={() => setShowComments(prev => !prev)}><CommentIcon /></i>
+          <i onClick={() => setShowComments(prev => !prev)}><MessageCircle /></i>
           <span>{boardItem.comments.length}</span>
         </div>
-        <i onClick={handleUploadClick}><IconUpload /></i>
+        <i onClick={handleUploadClick}><CloudUpload /></i>
       </div>
       {showComments && <Comments comments={boardItem.comments} />}
     </footer>

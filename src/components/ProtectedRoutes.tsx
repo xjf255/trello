@@ -3,6 +3,7 @@ import { NotAuthorized } from "./NotAuthorized"
 import Header from "../user/components/Header"
 import Aside from "../user/components/Aside"
 import { ModalProvider } from "../context/modal/sliceState"
+import UserHelp from "./UserHelp"
 interface Props {
   isAuthenticated: boolean
 }
@@ -18,6 +19,7 @@ export default function ProtectedRoutes({ isAuthenticated = false }: Props) {
         <Aside />
         <Outlet />
       </main>
+      <UserHelp />
     </ModalProvider>
   )
 }

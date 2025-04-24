@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "../styles/Document.css"
-import { Plus } from "./Icons"
+import { Plus } from "lucide-react"
 
 export function Document() {
   const initialHeader = Array(9).fill("")
@@ -8,7 +8,7 @@ export function Document() {
 
   const [headers, setHeaders] = useState(initialHeader)
   const [rows, setRows] = useState(initialRows)
-  const [title, setTitle] = useState("Document title")  
+  const [title, setTitle] = useState("Document title")
 
   const handleHeaderChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const newHeaders = [...headers]

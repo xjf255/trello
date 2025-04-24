@@ -1,10 +1,10 @@
 .dashboard{
-  background-color: hsl(60, 23%, 94%);
   height: 100%;
   min-height: 300px;
   width: 100%;
   padding: 20px 10px;
   place-content: inherit;
+  grid-area: main;
 }
 
 .dashboard__body {
@@ -25,21 +25,18 @@
 
     .select {
       width: 140px;
-
-      & > * {
-        z-index: 1000;
-      }
     }
 
     & h4 {
       margin: 6px;
       font-size: 30px;
+      user-select: none;
     }
 
     &>button {
       color: aliceblue;
       font-weight: 600;
-      background-color: rgb(100, 100, 255);
+      background-color: hsl(197, 84%, 12%);
     }
   }
 

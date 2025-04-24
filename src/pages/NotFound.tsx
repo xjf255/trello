@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { PATHS } from "../utils/constant"
+import "../styles/NotFound.css"
+import notFoundImage from "../../public/notFound.svg"
 
 export default function NotFound() {
   const navigate = useNavigate()
@@ -7,9 +9,12 @@ export default function NotFound() {
     navigate(PATHS.default)
   }
   return (
-    <>
-      404 this is not the web page you are looking for
-      <button onClick={handleClick}>go home</button>
-    </>
+    <section>
+      <div className="not-found">
+        <img src={notFoundImage} />
+        We can´t find this page, But we can help you find the right one.
+        <button onClick={handleClick}>go home</button>
+      </div>
+    </section>
   )
 }

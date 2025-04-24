@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Plus } from "../components/Icons";
 import '../styles/Document.css'
 import { PATHS } from "../utils/constant";
+import { FilePlus2 } from "lucide-react";
 
 export default function Documents() {
   const newDocument = crypto.randomUUID()
@@ -10,7 +10,7 @@ export default function Documents() {
       <ul className="documents__list">
         <li>
           <Link className="documents__new" to={PATHS.user.workerspace.documents + `/${newDocument}`} viewTransition>
-            <Plus />
+            <FilePlus2 />
           </Link>
         </li>
       </ul>

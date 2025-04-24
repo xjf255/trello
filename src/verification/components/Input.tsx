@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { Show, Warning } from "../../components/Icons"
 import { validatedUser } from "../../utils/schemas/validationUser"
 import { TypeOfInput } from "../../type"
 import { toast } from "sonner"
 import { useDebouncedCallback } from "use-debounce"
+import { CircleAlert, Eye } from "lucide-react"
 
 interface InputProps {
   name: string,
@@ -44,8 +44,8 @@ export const Input = ({ name, placeholder, type = TypeOfInput.text }: InputProps
       {name}:
       <div>
         <input type={!show ? type : "text"} name={name} placeholder={placeholder} onChange={e => debouncedInput(e)} />
-        {error && <i onClick={showWarning}><Warning /></i>}
-        {(!isEmpty && type === "password") && <i onClick={showPassword}><Show /></i>}
+        {error && <i onClick={showWarning}><CircleAlert /></i>}
+        {(!isEmpty && type === "password") && <i onClick={showPassword}><Eye /></i>}
       </div>
     </label>
   )

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { CloseModal } from './Icons'
 import '../styles/Modal.css'
 import { useModal } from '../hooks/useModal'
 import { DEFAULT_FORM, TASK_COLORS } from '../utils/constant'
@@ -8,6 +7,7 @@ import { useTaskActions } from '../hooks/useTaskActions'
 import { useBoardActions } from '../hooks/useBoardActions'
 import { useUserActions } from '../hooks/useUserActions'
 import { ModalContext } from '../context/modal/sliceState'
+import { CircleX } from 'lucide-react'
 
 export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
   const [color, setColor] = useState("")
@@ -61,7 +61,7 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
         <header className='modal__title'>
           <h2>Tasks details</h2>
           <figure className='title__close' onClick={changeModalState}>
-            <CloseModal />
+            <CircleX />
           </figure>
         </header>
         <form className='task__modal' ref={formRef} onSubmit={handleSubmit}>

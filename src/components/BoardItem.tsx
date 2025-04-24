@@ -11,7 +11,6 @@ export default function BoardItem(boardItem: IBoardWithId) {
   const { user } = useUserActions();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [show, changeModalState] = useState(false)
-  
   const handleShowConfigModal = () => {
     changeModalState(prev => !prev);
   };

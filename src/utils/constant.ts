@@ -1,4 +1,4 @@
-import { ClockIcon, DoneIcon, PendientIcon } from "../components/Icons"
+import { CircleCheckBig, CircleEllipsis, Clock } from "lucide-react"
 import { BoardStatus } from "../type"
 import { ItemStatusBoard } from "../types"
 
@@ -13,10 +13,12 @@ export const PATHS = {
   },
   user: {
     settings: '/settings',
+    profile: '/profile',
     workerspace: {
+      dashboard: '/dashboard',
       documents: "/documents",
       calendar: '/calendar',
-      dashboard: '/dashboard'
+      people: '/people',
     }
   },
   all: '*'
@@ -24,9 +26,9 @@ export const PATHS = {
 
 export const STATUS_BOARD: ItemStatusBoard[] = [
   { value: null, label: "All", icon: null },
-  { value: BoardStatus.PENDING, label: "Pending", icon: PendientIcon },
-  { value: BoardStatus.IN_PROGRESS, label: "In Progress", icon: ClockIcon },
-  { value: BoardStatus.DONE, label: "Done", icon: DoneIcon }
+  { value: BoardStatus.PENDING, label: "Pending", icon: CircleEllipsis },
+  { value: BoardStatus.IN_PROGRESS, label: "In Progress", icon: Clock },
+  { value: BoardStatus.DONE, label: "Done", icon: CircleCheckBig }
 ]
 
 export const STATUS_SELECTED_BOARD = STATUS_BOARD

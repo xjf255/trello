@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react"
-import { ReturnArrow } from "../components/Icons"
 import { DAYS, MONTHS } from "../utils/constant"
 import "../styles/Calendar.css"
 import { useModal } from "../hooks/useModal"
@@ -7,6 +6,7 @@ import { useTaskActions } from "../hooks/useTaskActions"
 import { IDate } from "../types"
 import { Modal } from "../components/Modal"
 import { ModalContext } from "../context/modal/sliceState"
+import { ArrowLeft } from "lucide-react"
 
 enum typeChangeMonth {
   next = "next",
@@ -78,13 +78,13 @@ export default function Calendar() {
       <div className="calendar__area">
         <header>
           <i onClick={() => changeMonth(typeChangeMonth.previous)}>
-            <ReturnArrow />
+            <ArrowLeft/>
           </i>
           <h2>
             {MONTHS[date.month]} {date.year}
           </h2>
           <i style={{ transform: "rotate(180deg)" }} onClick={() => changeMonth(typeChangeMonth.next)}>
-            <ReturnArrow />
+            <ArrowLeft />
           </i>
         </header>
         <table>
