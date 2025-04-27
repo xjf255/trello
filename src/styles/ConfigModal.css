@@ -10,20 +10,30 @@
   }
 
   &>.body__config {
-    border-radius: 8px 0 8px 8px;
-    background-color: #dfdddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #eee;
+    background-color: hsl(0, 0%, 0%);
     align-items: center;
     font-weight: 500;
+
+    ul {
+      width: 150px;
+    }
 
     & li {
       display: flex;
       gap: 4px;
-      padding: 4px 12px;
+      padding: 6px 12px;
       align-items: center;
       cursor: pointer;
 
+      &>* {
+        color: #d5d0d0;
+      }
+
       &:hover {
-        background-color: #d5d0d0;
+        background-color: #757070;  
       }
     }
   }

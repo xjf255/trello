@@ -1,6 +1,8 @@
 .calendar {
   padding: 10px;
   user-select: none;
+  display: grid;
+  place-items: center;
 }
 
 .calendar__area {

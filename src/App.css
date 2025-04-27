@@ -74,31 +74,6 @@ main {
   background-size: cover;
 }
 
-section {
-  display: grid;
-  place-content: center;
-
-  & form {
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #dbdbdb;
-    width: 400px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: start;
-
-    & label {
-      width: 100%;
-      overflow: hidden;
-      display: grid;
-      text-align: start;
-      grid-template-columns: repeat(1, 120px 1fr);
-    }
-  }
-}
-
 .isError {
   color: rgb(242, 51, 51);
 }
@@ -126,8 +101,13 @@ header {
   padding-inline: 30px;
   align-items: center;
 
+  &.master__header {
+    border-block-end: .5px solid hsl(60, 4%, 74%);
+  }
+
   & h1 {
     margin: 0;
+    font-size: 1.6em;
   }
 }
 
@@ -137,20 +117,100 @@ header {
   height: 100dvh;
 
   a {
-    color: rgb(8, 8, 63);
+    color: hsl(215, 99%, 63%);
     font-weight: 500;
   }
 
   h1 {
-    color: rgb(16, 22, 102);
+    color: hsl(197, 84%, 12%);
+    ;
   }
 
   & .verification__modal {
-    background-color: #dbdbdb;
-    width: 500px;
+    width: 400px;
     height: auto;
     padding: 20px;
     border-radius: 20px;
+    row-gap: 20px;
+
+    & .login__google {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 4px 0;
+    }
+
+    & form {
+      border-radius: 10px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: start;
+      position: relative;
+
+      & label {
+        width: 100%;
+        overflow: hidden;
+        text-align: start;
+
+        & strong {
+          font-weight: 500;
+        }
+      }
+
+      & .input-field{
+        width: 100%;
+      }
+
+      & .input__container {
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        border-radius: 8px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+
+        & input {
+          width: 100%;
+          margin: 0;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          font-size: 16px;
+          color: hsl(197, 84%, 12%);
+
+          &:focus {
+            background-color: #fff;
+            border: none;
+            outline: none;
+            box-shadow: none;
+          }
+        }
+      }
+
+      & .form__forgotPassword {
+        position: absolute; 
+        right: 0;
+        bottom: 52px;
+      }
+
+      & button {
+        background-color: hsl(197, 84%, 12%);
+        color: #fff;
+        width: 100%;
+        margin-top: 20px;
+        font-weight: 500;
+      }
+    }
+
   }
 }
 

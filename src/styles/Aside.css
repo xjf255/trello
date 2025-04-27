@@ -1,5 +1,7 @@
 aside {
   position: fixed;
+  background-color: hsl(0, 0%, 100%);
+  z-index: 1;
   grid-area: aside-list;
   grid-template-areas:
     'aside-head'
@@ -14,7 +16,7 @@ aside {
   margin: 0;
   border-inline-end: .5px solid hsl(60, 4%, 74%);
 
-  span{
+  span {
     display: inline;
   }
 

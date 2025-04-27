@@ -4,7 +4,7 @@ import { Plus } from "lucide-react"
 
 export function Document() {
   const initialHeader = Array(9).fill("")
-  const initialRows = Array.from({ length: 9 }, () => Array(9).fill(""))
+  const initialRows = Array.from({ length: 20 }, () => Array(9).fill(""))
 
   const [headers, setHeaders] = useState(initialHeader)
   const [rows, setRows] = useState(initialRows)
@@ -37,68 +37,70 @@ export function Document() {
   }
 
   return (
-    <div className="document">
-      <header>
-        <input
-          type="text"
-          className="document__title"
-          defaultValue={title}
-          placeholder="Document title"
-          onChange={handleTitleChange}
-        />
-        <span>
-          <button>Export</button>
-          <button>Import</button>
-        </span>
-      </header>
-      <section>
-        <div className="table-container">
-          <table className="document__board">
-            <thead>
-              <tr>
-                {headers.map((header, index) => (
-                  <th key={index}>
-                    {index === 0 ? (
-                      "Id"
-                    ) : (
-                      <input
-                        type="text"
-                        value={header}
-                        onChange={(e) => handleHeaderChange(index, e)}
-                      />
-                    )}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {row.map((cell, cellIndex) => (
-                    <td key={cellIndex}>
-                      {cellIndex === 0 ? (
-                        rowIndex
+    <section>
+      <div className="document">
+        <header>
+          <input
+            type="text"
+            className="document__title"
+            defaultValue={title}
+            placeholder="Document title"
+            onChange={handleTitleChange}
+          />
+          <span>
+            <button>Export</button>
+            <button>Import</button>
+          </span>
+        </header>
+        <section>
+          <div className="table-container">
+            <table className="document__board">
+              <thead>
+                <tr>
+                  {headers.map((header, index) => (
+                    <th key={index}>
+                      {index === 0 ? (
+                        "Id"
                       ) : (
                         <input
                           type="text"
-                          value={cell}
-                          onChange={(e) => handleRowChange(rowIndex, cellIndex, e)}
+                          value={header}
+                          onChange={(e) => handleHeaderChange(index, e)}
                         />
                       )}
-                    </td>
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <i onClick={handleAddColumn} className="column--add">
-          <Plus />
-        </i>
-        <i onClick={handleAddRow} className="row--add">
-          <Plus />
-        </i>
-      </section>
-    </div>
+              </thead>
+              <tbody>
+                {rows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.map((cell, cellIndex) => (
+                      <td key={cellIndex}>
+                        {cellIndex === 0 ? (
+                          rowIndex
+                        ) : (
+                          <input
+                            type="text"
+                            value={cell}
+                            onChange={(e) => handleRowChange(rowIndex, cellIndex, e)}
+                          />
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <i onClick={handleAddColumn} className="column--add">
+            <Plus />
+          </i>
+          <i onClick={handleAddRow} className="row--add">
+            <Plus />
+          </i>
+        </section>
+      </div>
+    </section>
   )
 }

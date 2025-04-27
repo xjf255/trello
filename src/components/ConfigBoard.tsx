@@ -2,7 +2,6 @@ import "../styles/ConfigModal.css"
 import { useBoardActions } from "../hooks/useBoardActions"
 import { BoardStatus } from "../type"
 import { ItemStatusBoard } from "../types"
-import { Peak } from "./Icons"
 
 interface ConfigBoardProps {
   items: ItemStatusBoard[]
@@ -22,7 +21,6 @@ export default function ConfigBoard({ items, selected, idBoard, changeModalState
 
   return (
     <div className="config__modal">
-      <Peak />
       <div className="body__config">
         <ul>
           {items.map((item, index) => {

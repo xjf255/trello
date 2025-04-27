@@ -66,19 +66,21 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
         </header>
         <form className='task__modal' ref={formRef} onSubmit={handleSubmit}>
           <label>
-            Title:
-            <input type="text" name="title" placeholder='My task...' defaultValue={defaultFormValues.taskTitle} />
+            <strong>Title:</strong>
+            <input type="text" name="title" placeholder='Create new project...' defaultValue={defaultFormValues.taskTitle} />
           </label>
           <label>
-            Description:
+            <strong>Description:</strong>
             <textarea name="description" defaultValue={defaultFormValues.taskDescription}></textarea>
           </label>
           {isDashboard && <label>
-            Members:
+            <strong>Members:</strong>
             <input name="members" placeholder='ej. trello@gmail.com,...'></input>
           </label>}
           {!isDashboard && <>
-            <label>Color:</label>
+            <label>
+              <strong>Color:</strong>
+            </label>
             <section className='circle__area'>
               {TASK_COLORS.map(color => (
                 <input
@@ -92,8 +94,9 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
                 />
               ))}
             </section>
-            </>}
-          <button>create task</button>
+          </>}
+          {!defaultFormValues && <button>create task</button>}
+          {defaultFormValues && <button>update task</button>}
         </form>
       </div>
     </div>,

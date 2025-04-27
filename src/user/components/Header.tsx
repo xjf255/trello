@@ -18,8 +18,8 @@ export default function Header() {
 
   if (!user) return <h1>Redirigiendo...</h1>
   return (
-    <header>
-      {<h1>Welcome, {user?.user || "Guest"}</h1>}
+    <header className="master__header">
+      {<h1>Welcome, {user?.user || "Guest"} 👋</h1>}
       <span>
         <ModalCloseSession />
       </span>

@@ -59,10 +59,9 @@ export default function Calendar() {
     changeModalState()
   }
 
-  const updateTask = (e: React.MouseEvent, object: object) => {
+  const updateTask = (object: object) => {
     localStorage.setItem("taskToUpdate", JSON.stringify(object))
     changeModalState()
-    e.stopPropagation()
   }
 
   // Get the days of the month with proper alignment
@@ -121,7 +120,7 @@ export default function Calendar() {
                       )}
                       {currentTask !== null && currentTask.length > 0 && <ul>
                         {currentTask.length > 0 && currentTask?.map((task, index) => (
-                          <li key={index}><p className="calendar__task" style={{ background: `${task.color}` }} onClick={(e) => updateTask(e, task)}>{task.taskTitle}</p></li>
+                          <li key={index}><p className="calendar__task" style={{ background: `${task.color}` }} onClick={() => updateTask(task)}>{task.taskTitle}</p></li>
                         ))}
                       </ul>}
                     </td>

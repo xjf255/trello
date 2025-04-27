@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react"
 import { validatedUser } from "../../utils/schemas/validationUser"
 import { TypeOfInput } from "../../type"
@@ -6,47 +7,93 @@ import { useDebouncedCallback } from "use-debounce"
 import { CircleAlert, Eye } from "lucide-react"
 
 interface InputProps {
-  name: string,
-  placeholder: string,
+  name: string
+  placeholder: string
+  label: string
   type?: TypeOfInput
 }
 
-export const Input = ({ name, placeholder, type = TypeOfInput.text }: InputProps) => {
-  const [isEmpty, setIsEmpty] = useState<boolean>(true)
-  const [error, setError] = useState<string>('')
-  const [show, setShow] = useState<boolean>(false)
+export const Input = ({ name, label, placeholder, type = TypeOfInput.text }: InputProps) => {
+  const [isEmpty, setIsEmpty] = useState(true)
+  const [error, setError] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
 
-  function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
-    const user = event.target.value
-    if (user.trim() === '') {
+  const validateInput = (value: string) => {
+    if (value.trim() === "") {
       setIsEmpty(true)
-      setError('')
+      setError("")
       return
     }
+
     setIsEmpty(false)
-    const isEmail = user.includes('@')
-    const validateField = validatedUser({ [isEmail ? "email" : name]: user })
-    if (!validateField.success) {
-      const { message } = JSON.parse(validateField.error.message)[0]
-      setError(message)
+
+    const fieldKey = value.includes("@") ? "email" : name
+
+    const validationResult = validatedUser({ [fieldKey]: value })
+    console.log(validationResult)
+    if (!validationResult.success) {
+      try {
+        const errorData = JSON.parse(validationResult.error.message)[0]
+        setError(errorData.message)
+      } catch (err) {
+        setError("Invalid input")
+      }
       return
     }
-    setError('')
+
+    setError("")
   }
 
-  const debouncedInput = useDebouncedCallback((e) => handleChangeInput(e), 1000)
+  const debouncedValidation = useDebouncedCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => validateInput(e.target.value), 500
+  )
 
-  const showPassword = () => setShow(!show)
-  const showWarning = () => toast.warning(error)
+  const togglePasswordVisibility = () => setShowPassword(prev => !prev)
+
+  const displayErrorToast = () => {
+    if (error) {
+      toast.warning(error)
+    }
+  }
+
+  const inputType = type === TypeOfInput.password
+    ? (showPassword ? "text" : "password")
+    : type
 
   return (
-    <label>
-      {name}:
-      <div>
-        <input type={!show ? type : "text"} name={name} placeholder={placeholder} onChange={e => debouncedInput(e)} />
-        {error && <i onClick={showWarning}><CircleAlert /></i>}
-        {(!isEmpty && type === "password") && <i onClick={showPassword}><Eye /></i>}
+    <div className="input-field">
+      <label htmlFor={name}>
+        <strong>{label}:</strong>
+      </label>
+
+      <div className="input__container">
+        <input
+          id={name}
+          type={inputType}
+          name={name}
+          placeholder={placeholder}
+          onChange={debouncedValidation}
+          aria-invalid={!!error}
+        />
+
+        {error && (
+          <i
+            onClick={displayErrorToast}
+            aria-label="Show validation error"
+          >
+            <CircleAlert size={18} />
+          </i>
+        )}
+
+        {type === TypeOfInput.password && !isEmpty && (
+          <i
+            onClick={togglePasswordVisibility}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            <Eye size={18} />
+          </i>
+        )}
       </div>
-    </label>
+    </div>
   )
 }

@@ -12,7 +12,8 @@ export default function Verification() {
   return (
     <section className="verification">
       <div className="verification__modal">
-        <h1>Verification</h1>
+        <h1>Welcome to trello</h1>
+        {/* <p>Project management designed for teams and individuals.</p> */}
         <Outlet />
       </div>
     </section>
