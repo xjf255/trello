@@ -1,0 +1,57 @@
+.people {
+  height: 50dvh;
+  display: grid;
+  justify-content: center;
+}
+
+.people__container {
+  margin: 20px;
+  width: 500px;
+  background-color: hsl(0, 0%, 100%);
+
+  & header {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+  }
+
+  button {
+    background-color: hsl(197, 84%, 12%);
+    color: hsl(0, 0%, 100%);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  & div,
+  label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & h4 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    & input {
+      width: 100%;
+      border: .5px solid hsl(60, 23%, 94%);
+      margin: 0;
+    }
+  }
+
+  & ul {
+    margin-top: 10px;
+    list-style: none;
+
+    & li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+  }
+}

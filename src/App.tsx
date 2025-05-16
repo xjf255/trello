@@ -20,6 +20,8 @@ const UserConfig = lazy(() => import('./user/UserConfig'))
 const FactorAuthentication = lazy(() => import('./verification/components/FactorAuthentication'))
 const ProtectedRoutes = lazy(() => import('./components/ProtectedRoutes'))
 const Documents = lazy(() => import('./pages/Documents'))
+const Peoples = lazy(() => import('./pages/People'))
+
 
 export default function App() {
   const { user, addUser } = useUserActions()
@@ -65,6 +67,7 @@ export default function App() {
             <Route path={PATHS.user.workerspace.dashboard} element={<DashBoard />} />
             <Route path={PATHS.user.settings} element={<UserConfig />} />
             <Route path={PATHS.user.workerspace.calendar} element={<Calendar />} />
+            <Route path ={PATHS.user.workerspace.people} element={<Peoples />} />
             <Route path={PATHS.user.workerspace.documents} element={<Documents />} />
             <Route path={PATHS.user.workerspace.documents+"/:documentId"} element={<Document />} />
           </Route>

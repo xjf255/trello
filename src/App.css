@@ -163,7 +163,7 @@ header {
         }
       }
 
-      & .input-field{
+      & .input-field {
         width: 100%;
       }
 
@@ -197,7 +197,7 @@ header {
       }
 
       & .form__forgotPassword {
-        position: absolute; 
+        position: absolute;
         right: 0;
         bottom: 52px;
       }
@@ -224,4 +224,36 @@ textarea {
   border: 1px solid rgb(86, 86, 86);
   background-color: #FFE;
   field-sizing: content;
+}
+
+.nav_el {
+  width: min-content;
+  padding: 10px 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  border-radius: 6px;
+  text-wrap: nowrap;
+  margin: 0;
+  color: #2a62bb;
+
+  &:hover {
+    background-color: transparent;
+    color: hsl(197, 84%, 12%);
+    text-decoration: none;
+  }
+}
+
+.btn_login {
+  background-color: hsl(196, 88%, 24%);
+  color: #fff;
+
+  &:hover {
+    background-color: hsl(197, 84%, 12%);
+    color: #fff;
+  }
+
 }
