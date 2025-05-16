@@ -77,10 +77,21 @@ export interface IBoardWithId extends IBoard {
   status: BoardStatus
 }
 
+export type TaskId = string
+
 export type IBoardState = IBoardWithId[]
 
 interface ItemStatusBoard {
   value: BoardStatus | null
   label: string
   icon: React.FC | null
+}
+
+export interface Plans {
+  plans: IPlans[]
+} 
+interface IPlans {
+  name: string
+  price: number
+  features: string[]
 }

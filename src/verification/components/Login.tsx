@@ -6,9 +6,9 @@ import { ValidationError } from "../../utils/customErrors/validationErrors"
 import { Input } from "./Input"
 import { TypeOfInput } from "../../type.ts"
 import { toast } from "sonner"
-import googleLogo from "../../../public/google.svg"
 import { useNavigate } from "react-router-dom"
 import { Toggle } from "./Toggle.tsx"
+import { GoogleIcon } from "./Icons.tsx"
 
 interface LoginCredentials {
   user: string
@@ -156,7 +156,7 @@ export const Login = () => {
         type="button"
         style={{ marginBlock: "1rem" }}
       >
-        <img src={googleLogo} alt="google" />
+        <GoogleIcon />
         <p>Continue with Google</p>
       </button>
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="122.01062mm"
+   height="109.60487mm"
+   viewBox="0 0 122.01062 109.60487"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <rect
+       x="493.01398"
+       y="484.93179"
+       width="132.42368"
+       height="126.82831"
+       id="rect371" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-52.021853,-60.371194)">
+    <g
+       id="g2"
+       transform="matrix(2.0932475,0,0,2.0932475,-196.10395,-187.77371)">
+      <path
+         style="fill:#052a39;fill-opacity:1;stroke-width:0.264583"
+         id="path371"
+         d="M 134.14375,54.239584 C 118.40104,63.129583 123.88752,63.1819 108.3172,53.993314 92.746878,44.804728 95.444809,49.582315 95.617198,31.50373 95.789587,13.425145 93.001041,18.150416 108.74375,9.2604163 c 15.74271,-8.88999933 10.25623,-8.94231585 25.82655,0.2462701 15.57032,9.1885856 12.87239,4.4109986 12.7,22.4895836 -0.17239,18.078585 2.61616,13.353314 -13.12655,22.243314 z"
+         transform="rotate(88.508087,76.583584,101.70231)" />
+      <text
+         xml:space="preserve"
+         transform="matrix(1.1457995,0,0,1.5615028,-434.65889,-637.00363)"
+         id="text371"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Playfair;-inkscape-font-specification:'Playfair Italic';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect371);display:inline;fill:#ffffff;fill-opacity:1;stroke-width:1.00017;stroke-dasharray:none"><tspan
+           x="493.01367"
+           y="507.94242"
+           id="tspan2">OL</tspan></text>
+    </g>
+  </g>
+</svg>

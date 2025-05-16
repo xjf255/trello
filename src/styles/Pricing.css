@@ -1,0 +1,42 @@
+.plans__card {
+  width: 100vw;
+
+  & .plans__list {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  ul {
+    margin: 8px 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  li::marker {
+    content: "✅ ";
+    font-size: 10px;
+  }
+
+  .btn-select {
+    background-color: hsl(197, 84%, 12%);
+    color: #fff;
+    font-weight: 500;
+
+    &:hover {
+      background-color: hsl(196, 88%, 24%);
+      color: #fff;
+    }
+  }
+}
+
+.plan-card {
+  padding: 20px;
+  width: 300px;
+  background-color: #eee;
+}

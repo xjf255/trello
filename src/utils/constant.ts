@@ -50,6 +50,12 @@ export const TASK_COLORS = [
   "FF2D55"  // Rosa neón 💖
 ]
 
+export const PLANS = [
+  { name: "Free / 7 days", price: 0, features: ["Basic features", "Limited storage"] },
+  { name: "Pro", price: 10, features: ["All Free features", "Advanced features", "Priority support"] },
+  { name: "Enterprise", price: 20, features: ["All Pro features", "Custom solutions", "Dedicated support"] }
+]
+
 export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 export const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
