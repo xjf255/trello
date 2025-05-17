@@ -255,7 +255,7 @@ textarea {
 .btn_login {
   background-color: hsl(196, 88%, 24%);
   color: #fff;
-  
+
   &:hover {
     background-color: hsl(197, 84%, 12%);
     color: #fff;
@@ -270,5 +270,27 @@ textarea {
 
   &>* {
     color: #fff;
+  }
+}
+
+@media (width > 376px) and (width < 1000px) {
+  body {}
+
+  .plans__list {
+    flex-direction: column;
+    gap: 30px;
+  } 
+
+  .contact {
+    flex-direction: column;
+    height: 50%;
+
+    .contact__about {
+      width: 250px !important;
+    }
+
+    & .about__description {
+      width: 100%;
+    }
   }
 }

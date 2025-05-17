@@ -37,6 +37,8 @@
 
 .plan-card {
   padding: 20px;
-  width: 300px;
+  min-width: 300px;
+  max-width: 400px;
   background-color: #eee;
+  border-radius: 10px;
 }

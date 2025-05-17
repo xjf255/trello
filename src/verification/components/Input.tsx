@@ -9,7 +9,7 @@ import { CircleAlert, Eye } from "lucide-react"
 interface InputProps {
   name: string
   placeholder: string
-  label: string
+  label?: string
   type?: TypeOfInput
 }
 

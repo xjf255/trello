@@ -10,8 +10,6 @@ export default function Home() {
       <header className="header__nav">
         <img src="/logo.svg" alt="OL" width={50} />
         <span>
-          <button className="nav_el">Pricing</button>
-          <button className="nav_el">About Us</button>
           <NavLink to={PATHS.verification.signup} className="nav_el">Sign up</NavLink>
           <NavLink to={PATHS.verification.login} className="btn_login nav_el">Try for free</NavLink>
         </span>
