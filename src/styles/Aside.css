@@ -23,6 +23,7 @@ aside {
   &.--hide {
     width: 44px;
     width: min-content;
+    transition: all 5s ease-in-out;
 
     & span,
     p,
@@ -109,5 +110,11 @@ aside {
 
   & .rotate {
     transform: rotate(180deg);
+  }
+  .aside__head--logo{
+    transition: all 0.2s ease-in-out;
+    &.hide{
+      display: none;
+    }
   }
 }

@@ -26,13 +26,16 @@ export default function Aside() {
       aside.classList.toggle("--hide")
       main.classList.toggle("aside--hide")
       document.querySelector(".aside__head--icon")?.classList.toggle("rotate")
+      document.querySelector(".aside__head--logo")?.classList.toggle("hide")
     }
   }
 
   return (
     <aside>
       <header className="aside__head">
-        <p>logo</p>
+        <figure className="aside__head--logo">
+          <img src="/logo.svg" alt="OL" width={40} />
+        </figure>
         <ChevronsLeft
           className="aside__head--icon"
           size={18}
