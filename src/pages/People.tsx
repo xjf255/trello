@@ -1,13 +1,10 @@
-import { Trash2, UserRoundPlus } from "lucide-react"
+import { UserRoundPlus } from "lucide-react"
 import "../styles/People.css"
+import { usePeopleActions } from "../hooks/usePeopleActions";
+import { PeopleSection } from "../components/PeopleSection";
 
 export default function Peoples() {
-  const peoples = [
-    { id: 1,avatar: "https://res.cloudinary.com/dkshw9hik/image/upload/v1736294033/avatardefault_w9hsxz.webp", name: "John Doe", email: "admin@gmail.com" },
-    { id: 2,avatar: "", name: "Jane Smith", email: ""},
-    { id: 3,avatar: "", name: "Alice Johnson", email: ""},
-    { id: 4,avatar: "", name: "Bob Brown", email: ""}
-  ]
+  const { people } = usePeopleActions();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value.toLowerCase();
@@ -25,25 +22,10 @@ export default function Peoples() {
         </header>
         <hr />
         <label>
-          <input type="text" placeholder="Search" onChange={handleSearch}/>
+          <input type="text" placeholder="Search" onChange={handleSearch} />
         </label>
         <ul>
-          {peoples.length === 0 && (
-            <li>
-              <p>There are not people</p>
-            </li>
-          )}
-          {
-            peoples.map((person) => (
-              <li key={person.id}>
-                <figure>
-                  <img src={person.avatar || "https://res.cloudinary.com/dkshw9hik/image/upload/v1736294033/avatardefault_w9hsxz.webp"} className="avatar" alt={person.name} />
-                </figure>
-                <strong>{person.name}</strong>
-                <button><Trash2 size={18} color="red" /></button>
-              </li>
-            ))
-          }
+          <PeopleSection people={people} />
         </ul>
       </div>
     </section>

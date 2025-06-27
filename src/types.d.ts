@@ -7,7 +7,7 @@ export interface IUsers {
   updatedAt: Date
   isActive: boolean
   password?: string
-  avatar: string | File
+  avatar: string
 }
 interface ModalContextType {
   isOpen: boolean
@@ -49,6 +49,7 @@ interface IStateActions {
   task: TaskState[] | null
   user: IUserStore
   board: IBoardWithId[] | null
+  people: IPeopleState[] | null
 }
 
 export interface IComment {
