@@ -3,7 +3,7 @@ import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Provider } from 'react-redux'
-import { userStore } from './context/userStore.ts'
+import { userStore } from './context/store.ts'
 import React from 'react'
 
 const queryClient = new QueryClient()

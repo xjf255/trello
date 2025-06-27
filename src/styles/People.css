@@ -4,6 +4,13 @@
   justify-content: center;
 }
 
+.avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 90%);
+}
+
 .people__container {
   margin: 20px;
   width: 500px;

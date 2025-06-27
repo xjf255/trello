@@ -19,7 +19,7 @@ export interface IUserStore extends IUsers {
 }
 
 export type IUser = Pick<IUsers, 'user' | 'password'>
-export type IUserSignUp = Pick<IUsers, 'user' | 'password' | 'email', 'phone'>
+export type IUserSignUp = Pick<IUsers, 'user' | 'password' | 'email' | 'phone'>
 export type IUpdateUser = Omit<IUsers, "createdAt" | "id" | "updatedAt">
 
 interface dateOfTask {
@@ -95,3 +95,9 @@ interface IPlans {
   price: number
   features: string[]
 }
+
+interface UserState {
+  user: IUserStore | null;
+}
+
+type IPeopleState = Omit<IUsers,"password" | "phone">
