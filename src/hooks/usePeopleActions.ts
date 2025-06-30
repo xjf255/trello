@@ -18,5 +18,9 @@ export const usePeopleActions = () => {
     dispatch({ type: 'people/updatePerson', payload: updatedPerson })
   }
 
-  return { people, addPerson, removePerson, updatePerson }
+  const filterPeople = (query: string) => {
+    return people?.filter(person => person.user.toLowerCase().includes(query.toLowerCase())) ?? null
+  }
+
+  return { people, addPerson, removePerson, updatePerson, filterPeople}
 }
