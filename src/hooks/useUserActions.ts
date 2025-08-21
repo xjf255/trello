@@ -6,16 +6,6 @@ import { useCallback, useMemo } from "react";
 
 type RootState = { user: IStateActions };
 
-/**
- * Hook personalizado para manejar acciones relacionadas con el usuario.
- * Proporciona funciones para agregar y eliminar usuarios, así como acceso al estado actual del usuario.
- *
- * @returns {Object} Un objeto que contiene:
- * - `user`: El estado actual del usuario.
- * - `addUser`: Función para agregar un usuario al estado.
- * - `removeUser`: Función para eliminar el usuario del estado y limpiar las consultas relacionadas.
- */
-
 export const useUserActions = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();

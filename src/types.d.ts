@@ -101,4 +101,4 @@ interface UserState {
   user: IUserStore | null;
 }
 
-type IPeopleState = Omit<IUsers,"password" | "phone">
+type IPeopleState = Omit<IUsers,"password" | "phone" | "createdAt" | "updatedAt"> 

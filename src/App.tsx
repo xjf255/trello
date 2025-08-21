@@ -10,6 +10,7 @@ import { useUserActions } from './hooks/useUserActions'
 import { Toaster } from 'sonner'
 import { Document } from './components/Document'
 import ErrorBoundary from './components/ErrorBoundary'
+import Profile from './components/Profile'
 
 const Home = lazy(() => import('./home/Home'))
 const Verification = lazy(() => import('./verification/Verification'))
@@ -70,6 +71,7 @@ export default function App() {
             <Route path ={PATHS.user.workerspace.people} element={<Peoples />} />
             <Route path={PATHS.user.workerspace.documents} element={<Documents />} />
             <Route path={PATHS.user.workerspace.documents+"/:documentId"} element={<Document />} />
+            <Route path={PATHS.user.profile} element={<Profile />} />
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>

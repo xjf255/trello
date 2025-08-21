@@ -5,9 +5,7 @@ import { usePeopleActions } from "../hooks/usePeopleActions";
 export const PeopleSection = ({ people }: { people: IPeopleState[] | null }) => {
   const { removePerson } = usePeopleActions()
   const handleRemovePerson = (id: string) => {
-    if (window.confirm("Are you sure you want to remove this person?")) {
-      removePerson(id);
-    }
+    removePerson(id);
   }
 
   if (!people || people.length === 0) {

@@ -1,6 +1,7 @@
-import { UserRoundPlus, X } from "lucide-react"
+import { UserRoundPlus } from "lucide-react"
 import { usePeopleActions } from "../hooks/usePeopleActions"
 import { useState, useEffect, useRef } from "react"
+import { toast } from "sonner"
 
 interface ModalPeopleProps {
   isOpen: boolean
@@ -13,7 +14,6 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
 
-  // Handle dialog open/close based on isOpen prop
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return
@@ -25,7 +25,6 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
     }
   }, [isOpen])
 
-  // Close modal when dialog is closed (including ESC key or backdrop click)
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return
@@ -46,20 +45,21 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
 
     setIsLoading(true)
     try {
-      // TODO: update API to get information from the email
       await addPerson({ email: email.trim() })
-      setEmail("") // Reset form
-      onClose() // Close modal on success
+      setEmail("")
+      onClose()
     } catch (error) {
       console.error("Failed to add person:", error)
-      // Handle error (show toast, etc.)
+      const errorMessage = typeof error === "object" && error !== null && "message" in error
+        ? (error as { message?: string }).message
+        : undefined;
+      toast.error(errorMessage || "Failed to add person")
     } finally {
       setIsLoading(false)
     }
   }
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDialogElement>) => {
-    // Close modal when clicking on backdrop (outside the form)
     if (event.target === event.currentTarget) {
       onClose()
     }
@@ -70,6 +70,7 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
       ref={dialogRef}
       onClick={handleBackdropClick}
       className="modal-people"
+      style={{ margin: 'auto'}}
     >
       <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
@@ -88,7 +89,7 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
           />
         </div>
         
-        <div className="modal-footer">
+        <div className="modal-footer" style={{marginTop: '1rem'}}>
           <button
             type="button"
             onClick={onClose}

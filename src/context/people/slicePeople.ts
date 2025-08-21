@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IPeopleState } from "../../types"
 
 const initialState: IPeopleState[] = [
-  { id: "1", avatar: "https://res.cloudinary.com/dkshw9hik/image/upload/v1736294033/avatardefault_w9hsxz.webp", user: "John Doe", email: "admin@gmail.com", createdAt: new Date(), updatedAt: new Date(), isActive: true },
-  { id: "2", avatar: "", user: "Jane Smith", email: "" , createdAt: new Date(), updatedAt: new Date(), isActive: true },
-  { id: "3", avatar: "", user: "Alice Johnson", email: "", createdAt: new Date(), updatedAt: new Date(), isActive: true},
-  { id: "4", avatar: "", user: "Bob Brown", email: "", createdAt: new Date(), updatedAt: new Date(), isActive: true }
+  { id: "1", avatar: "https://res.cloudinary.com/dkshw9hik/image/upload/v1736294033/avatardefault_w9hsxz.webp", user: "John Doe", email: "admin@gmail.com", isActive: true },
+  { id: "2", avatar: "", user: "Jane Smith", email: "", isActive: true },
+  { id: "3", avatar: "", user: "Alice Johnson", email: "", isActive: true},
+  { id: "4", avatar: "", user: "Bob Brown", email: "", isActive: true }
 ]
 
 const peopleSlice = createSlice({
