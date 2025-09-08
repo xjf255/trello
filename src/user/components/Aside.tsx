@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { PATHS } from "../../utils/constant"
-import { Calendar1, ChevronsLeft, CircleUserRound, FileText, LayoutDashboard, Settings, Users } from "lucide-react"
+import { Calendar1, ChevronsLeft, CircleUserRound, FileText, LayoutDashboard, Users } from "lucide-react"
 import { useUserActions } from "../../hooks/useUserActions"
 import "../../styles/Aside.css"
 
@@ -15,7 +15,6 @@ export default function Aside() {
   ]
 
   const listFooter = [
-    { name: "Settings", icon: <Settings size={18} />, path: PATHS.user.settings },
     { name: user.user, icon: <CircleUserRound />, path: PATHS.user.profile },
   ]
 

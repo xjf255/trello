@@ -1,0 +1,13 @@
+.input-field{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;  
+
+  label {
+    text-align: right;
+    width: 130px;
+    font-weight: 400;
+    font-size: 1rem
+  }
+}

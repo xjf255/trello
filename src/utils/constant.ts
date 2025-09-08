@@ -12,7 +12,6 @@ export const PATHS = {
     passwordReset: '/verification/password_reset'
   },
   user: {
-    settings: '/settings',
     profile: '/profile',
     workerspace: {
       dashboard: '/dashboard',

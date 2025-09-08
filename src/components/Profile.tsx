@@ -3,6 +3,7 @@ import "../styles/Profile.css"
 
 export default function Profile() {
   const { user } = useUserActions();
+  console.log(user)
   return (
     <section className="profile">
       <div className="profile__container">

@@ -9,7 +9,7 @@ aside {
     'aside-footer';
   display: grid;
   row-gap: 10px;
-  grid-template-rows: 50px 1fr 130px;
+  grid-template-rows: 50px 1fr 90px;
   width: 250px;
   height: 100vh;
   padding: 10px;

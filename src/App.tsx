@@ -17,7 +17,6 @@ const Verification = lazy(() => import('./verification/Verification'))
 const DashBoard = lazy(() => import('./pages/DashBoard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const Calendar = lazy(() => import('./pages/Calendar'))
-const UserConfig = lazy(() => import('./user/UserConfig'))
 const FactorAuthentication = lazy(() => import('./verification/components/FactorAuthentication'))
 const ProtectedRoutes = lazy(() => import('./components/ProtectedRoutes'))
 const Documents = lazy(() => import('./pages/Documents'))
@@ -38,6 +37,15 @@ export default function App() {
     },
     staleTime: 0,
     retry: false
+  })
+
+  document.addEventListener('keyup', (event) => {
+    if (event.key === 'Escape') {
+      const dialog = document.querySelector('dialog')
+      if (dialog && dialog.open) {
+        dialog.close()
+      }
+    }
   })
 
   const isAuth = !!user?.id
@@ -66,7 +74,6 @@ export default function App() {
           </Route>
           <Route element={<ProtectedRoutes isAuthenticated={isAuth} />}>
             <Route path={PATHS.user.workerspace.dashboard} element={<DashBoard />} />
-            <Route path={PATHS.user.settings} element={<UserConfig />} />
             <Route path={PATHS.user.workerspace.calendar} element={<Calendar />} />
             <Route path ={PATHS.user.workerspace.people} element={<Peoples />} />
             <Route path={PATHS.user.workerspace.documents} element={<Documents />} />

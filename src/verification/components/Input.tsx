@@ -70,6 +70,7 @@ export const Input = ({ name, label, placeholder, type = TypeOfInput.text }: Inp
         <input
           id={name}
           type={inputType}
+          autoComplete={inputType === "password" ? "current-password" : "username"}
           name={name}
           placeholder={placeholder}
           onChange={debouncedValidation}
