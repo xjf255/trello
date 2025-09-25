@@ -12,7 +12,7 @@ export const friendlyAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:1234/friendships/' }),
   endpoints: (build) => ({
     getFriendships: build.query<IPeopleState, string>({
-      query: (name) => `pokemon/${name}`,
+      query: (name) => `${name}/friends`,
     }),
   }),
 })
