@@ -1,31 +1,17 @@
 import { UserRoundPlus } from "lucide-react"
 import "../styles/People.css"
-// import { usePeopleActions } from "../hooks/usePeopleActions"
-// import { PeopleSection } from "../components/PeopleSection"
 import { ModalPeople } from "../components/ModalPeople"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { fetchFriendships } from "../context/people/sliceFriendship"
-import { unwrapResult } from "@reduxjs/toolkit"
 import { useUserActions } from "../hooks/useUserActions"
+import { useGetFriendshipsQuery } from "../context/people/friendlyAPI"
+import { ItemUser } from "../components/ItemUser"
 
 export default function Peoples() {
-  // const { people: allPeople, filterPeople } = usePeopleActions()
   const [searchTerm, setSearchTerm] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const dispatch = useDispatch()
   const { user } = useUserActions()
-
-  const onClick = async () => {
-    try {
-      const resultAction = await dispatch(fetchFriendships(user.id))
-      const originalPromiseResult = unwrapResult(resultAction)
-      console.log('Result: ', originalPromiseResult)
-      // handle result here
-    } catch (rejectedValueOrSerializedError) {
-      console.log('Failed to fetch friendships: ', rejectedValueOrSerializedError)
-    }
-  }
+  const { data, isLoading } = useGetFriendshipsQuery(user.id)
+  console.log({ data, isLoading })
 
   // const filteredPeople = useMemo(() => {
   //   if (!searchTerm.trim()) {
@@ -74,8 +60,14 @@ export default function Peoples() {
           />
         </label>
         <ul>
-          <button onClick={onClick}>Fetch Friendships</button>
-          {/* <PeopleSection people={filteredPeople} /> */}
+          {isLoading && <li>Loading...</li>}
+          {!isLoading && data?.friends?.length === 0 && <li>No friends found.</li>}
+          {!isLoading &&
+            data?.friends?.map(friend => (
+              <li key={friend.id} className="friendly-container">
+                <ItemUser {...friend} />
+              </li>
+            ))}
         </ul>
       </div>
     </section>

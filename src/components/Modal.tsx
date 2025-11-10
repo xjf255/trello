@@ -18,6 +18,12 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
   const { isOpen, changeModalState } = useModal(ModalContext)
   const formRef = useRef<HTMLFormElement | null>(null)
 
+  const closeModal = () => {
+    changeModalState()
+    localStorage.removeItem("taskDate")
+    localStorage.removeItem("taskToUpdate")
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!formRef.current) return
@@ -35,7 +41,7 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
       if (!members) return
       createNewBoard({ title: taskTitle, description: taskDescription, owner: user?.user ?? "", date: Date.now(), users: members.split(",") })
     }
-    changeModalState()
+    closeModal()
   }
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
       localStorage.removeItem("taskToUpdate")
     } else { setDefaultFormValues(DEFAULT_FORM) }
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") changeModalState()
+      if (event.key === "Escape") closeModal()
     }
 
     if (isOpen) document.addEventListener("keydown", handleKeyDown)
@@ -56,11 +62,11 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
   if (!isOpen) return null
 
   return createPortal(
-    <div className='dark' onClick={changeModalState}>
+    <div className='dark' onClick={closeModal}>
       <div className="task--new" onClick={(event) => event.stopPropagation()}>
         <header className='modal__title'>
           <h2>Tasks details</h2>
-          <figure className='title__close' onClick={changeModalState}>
+          <figure className='title__close' onClick={closeModal}>
             <CircleX />
           </figure>
         </header>
@@ -95,8 +101,8 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
               ))}
             </section>
           </>}
-          {!defaultFormValues && <button>create task</button>}
-          {defaultFormValues && <button>update task</button>}
+          {!defaultFormValues.taskTitle && <button>create task</button>}
+          {defaultFormValues.taskTitle && <button>update task</button>}
         </form>
       </div>
     </div>,

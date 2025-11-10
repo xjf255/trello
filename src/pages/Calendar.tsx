@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { MouseEvent, useMemo, useState } from "react"
 import { DAYS, MONTHS } from "../utils/constant"
 import "../styles/Calendar.css"
 import { useModal } from "../hooks/useModal"
@@ -59,7 +59,8 @@ export default function Calendar() {
     changeModalState()
   }
 
-  const updateTask = (object: object) => {
+  const updateTask = (e: MouseEvent<HTMLParagraphElement>, object: object) => {
+    e.stopPropagation()
     localStorage.setItem("taskToUpdate", JSON.stringify(object))
     changeModalState()
   }
@@ -77,7 +78,7 @@ export default function Calendar() {
       <div className="calendar__area">
         <header>
           <i onClick={() => changeMonth(typeChangeMonth.previous)}>
-            <ArrowLeft/>
+            <ArrowLeft />
           </i>
           <h2>
             {MONTHS[date.month]} {date.year}
@@ -120,7 +121,7 @@ export default function Calendar() {
                       )}
                       {currentTask !== null && currentTask.length > 0 && <ul>
                         {currentTask.length > 0 && currentTask?.map((task, index) => (
-                          <li key={index}><p className="calendar__task" style={{ background: `${task.color}` }} onClick={() => updateTask(task)}>{task.taskTitle}</p></li>
+                          <li key={index}><p className="calendar__task" style={{ background: `${task.color}` }} onClick={(e) => updateTask(e, task)}>{task.taskTitle}</p></li>
                         ))}
                       </ul>}
                     </td>

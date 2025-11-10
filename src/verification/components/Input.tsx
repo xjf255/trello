@@ -30,7 +30,6 @@ export const Input = ({ name, label, placeholder, type = TypeOfInput.text }: Inp
     const fieldKey = value.includes("@") ? "email" : name
 
     const validationResult = validatedUser({ [fieldKey]: value })
-    console.log(validationResult)
     if (!validationResult.success) {
       try {
         const errorData = JSON.parse(validationResult.error.message)[0]

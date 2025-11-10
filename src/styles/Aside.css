@@ -57,6 +57,10 @@ aside {
     text-align: start;
   }
 
+  .item--user{
+    text-transform: initial;
+  }
+
   & li {
     width: 100%;
     padding: 4px;

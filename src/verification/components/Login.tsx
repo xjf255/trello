@@ -115,7 +115,6 @@ export const Login = () => {
       const user = formData.get('user')?.toString()
       const password = formData.get('password')?.toString()
 
-      console.log(user)
       if (!user && !password) {
         throw new ValidationError("Username/email and password are required", '*')
       } else if (!user) {

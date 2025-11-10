@@ -77,7 +77,7 @@ export default function Aside() {
                   className={({ isActive }) => isActive ? "item--select" : ""}
                 >
                   {item.icon}
-                  <span>{item.name}</span>
+                  <span className="item--user">{item.name}</span>
                 </NavLink>
               </li>
             )
