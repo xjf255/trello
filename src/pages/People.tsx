@@ -1,36 +1,38 @@
 import { UserRoundPlus } from "lucide-react"
 import "../styles/People.css"
 import { ModalPeople } from "../components/ModalPeople"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useUserActions } from "../hooks/useUserActions"
 import { useGetFriendshipsQuery } from "../context/people/friendlyAPI"
 import { ItemUser } from "../components/ItemUser"
+import { IPeopleState } from "../types"
 
 export default function Peoples() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { user } = useUserActions()
-  const { data, isLoading } = useGetFriendshipsQuery(user.id)
-  console.log({ data, isLoading })
+  const { data: friendsFromApi = [], isLoading } = useGetFriendshipsQuery(user.id)
 
-  // const filteredPeople = useMemo(() => {
-  //   if (!searchTerm.trim()) {
-  //     return allPeople
-  //   }
-  //   return filterPeople(searchTerm)
-  // }, [allPeople, searchTerm, filterPeople])
+  const filteredPeople = useMemo(() => {
+    const list = Array.isArray(friendsFromApi) ? friendsFromApi : friendsFromApi?.friends ?? []
+
+    if (!searchTerm.trim()) {
+      return list
+    }
+
+    const term = searchTerm.toLowerCase()
+    return list.filter((friend: IPeopleState) =>
+      friend.user?.toLowerCase().includes(term) ||
+      friend.email?.toLowerCase().includes(term)
+    )
+  }, [friendsFromApi, searchTerm])
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+  const handleOpenModal = () => setIsModalOpen(true)
+  const handleCloseModal = () => setIsModalOpen(false)
 
   return (
     <section className="people">
@@ -51,19 +53,21 @@ export default function Peoples() {
             />
           </div>
         </header>
-        <label>
+        <form>
           <input
             type="text"
-            placeholder="Search"
+            id="search-user"
+            placeholder="search user..."
+            name="user-search"
             value={searchTerm}
             onChange={handleSearch}
           />
-        </label>
+        </form>
         <ul>
           {isLoading && <li>Loading...</li>}
-          {!isLoading && data?.friends?.length === 0 && <li>No friends found.</li>}
+          {!isLoading && filteredPeople.length === 0 && <li>No friends found.</li>}
           {!isLoading &&
-            data?.friends?.map(friend => (
+            filteredPeople.map(friend => (
               <li key={friend.id} className="friendly-container">
                 <ItemUser {...friend} />
               </li>

@@ -1,7 +1,8 @@
 import { UserRoundPlus } from "lucide-react"
-import { usePeopleActions } from "../hooks/usePeopleActions"
 import { useState, useEffect, useRef } from "react"
 import { toast } from "sonner"
+import { useSendFriendshipRequestMutation } from "../context/people/friendlyAPI"
+import { useUserActions } from "../hooks/useUserActions"
 
 interface ModalPeopleProps {
   isOpen: boolean
@@ -9,10 +10,10 @@ interface ModalPeopleProps {
 }
 
 export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
-  const { addPerson } = usePeopleActions()
+  const [sendRequest, { isLoading, isSuccess, isError }] = useSendFriendshipRequestMutation()
   const [email, setEmail] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const { user } = useUserActions()
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -40,22 +41,18 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    
+
     if (!email.trim()) return
 
-    setIsLoading(true)
     try {
-      await addPerson({ email: email.trim() })
+      await sendRequest({ addressee: email.trim(), requesterId: user.id })
       setEmail("")
-      onClose()
     } catch (error) {
       console.error("Failed to add person:", error)
       const errorMessage = typeof error === "object" && error !== null && "message" in error
         ? (error as { message?: string }).message
         : undefined;
       toast.error(errorMessage || "Failed to add person")
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -66,17 +63,17 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
   }
 
   return (
-    <dialog 
+    <dialog
       ref={dialogRef}
       onClick={handleBackdropClick}
       className="modal-people"
-      style={{ margin: 'auto'}}
+      style={{ margin: 'auto' }}
     >
       <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3>Add New Person</h3>
         </div>
-        
+
         <div className="modal-body">
           <input
             id="email-input"
@@ -88,8 +85,8 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
             disabled={isLoading}
           />
         </div>
-        
-        <div className="modal-footer" style={{marginTop: '1rem'}}>
+
+        <div className="modal-footer" style={{ marginTop: '1rem' }}>
           <button
             type="button"
             onClick={onClose}
@@ -104,7 +101,7 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
             className="submit-button"
           >
             <UserRoundPlus size={18} />
-            {isLoading ? 'Adding...' : 'Add Person'}
+            {isLoading ? "Enviando..." : isSuccess ? "Enviada ✅" : "Agregar amigo"}
           </button>
         </div>
       </form>

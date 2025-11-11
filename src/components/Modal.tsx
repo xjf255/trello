@@ -63,7 +63,7 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
 
   return createPortal(
     <div className='dark' onClick={closeModal}>
-      <div className="task--new" onClick={(event) => event.stopPropagation()}>
+      <section className="task--new" onClick={(event) => event.stopPropagation()}>
         <header className='modal__title'>
           <h2>Tasks details</h2>
           <figure className='title__close' onClick={closeModal}>
@@ -104,7 +104,7 @@ export function Modal({ isDashboard = false }: { isDashboard?: boolean }) {
           {!defaultFormValues.taskTitle && <button>create task</button>}
           {defaultFormValues.taskTitle && <button>update task</button>}
         </form>
-      </div>
+      </section>
     </div>,
     document.body
   )

@@ -4,7 +4,7 @@ import taskReducer from "./taskCalendar/sliceTask"
 import boardReducer from "./Dashboard/sliceBoard"
 import { friendlyAPI } from "./people/friendlyAPI"
 
-export const userStore = configureStore({
+export const store = configureStore({
   reducer: {
     user: userReducer,
     task: taskReducer,
@@ -14,3 +14,6 @@ export const userStore = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(friendlyAPI.middleware)
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

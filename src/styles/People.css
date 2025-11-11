@@ -4,7 +4,22 @@
   justify-content: center;
 }
 
-.avatar{
+form {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+}
+
+#search-user {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+  padding: 10px;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -32,6 +47,8 @@
 .people__container {
   margin: 20px;
   width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
   background-color: hsl(0, 0%, 100%);
 
   & header {
