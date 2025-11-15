@@ -15,6 +15,10 @@ export const friendlyAPI = createApi({
       query: (userId) => `${userId}/friends`,
     }),
 
+    getFriendShipsRequest: build.query<FriendshipsResponse, string>({
+      query: (userId) =>`${userId}/requests`
+    }),
+
     sendFriendshipRequest: build.mutation<boolean, { addressee: string; requesterId: string }>({
       query: ({ addressee, requesterId }) => ({
         url: `request`,
@@ -25,4 +29,4 @@ export const friendlyAPI = createApi({
   }),
 })
 
-export const { useGetFriendshipsQuery, useSendFriendshipRequestMutation } = friendlyAPI
+export const { useGetFriendshipsQuery, useSendFriendshipRequestMutation, useGetFriendShipsRequestQuery } = friendlyAPI

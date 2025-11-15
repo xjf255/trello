@@ -1,9 +1,9 @@
-import { UserRoundPlus } from "lucide-react"
+import { UserLockIcon, UserRoundPlus } from "lucide-react"
 import "../styles/People.css"
 import { ModalPeople } from "../components/ModalPeople"
 import { useMemo, useState } from "react"
 import { useUserActions } from "../hooks/useUserActions"
-import { useGetFriendshipsQuery } from "../context/people/friendlyAPI"
+import { useGetFriendshipsQuery, useGetFriendShipsRequestQuery } from "../context/people/friendlyAPI"
 import { ItemUser } from "../components/ItemUser"
 import { IPeopleState } from "../types"
 
@@ -12,6 +12,9 @@ export default function Peoples() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { user } = useUserActions()
   const { data: friendsFromApi = [], isLoading } = useGetFriendshipsQuery(user.id)
+  const { data: requestsFriendShip, isLoading: isLoadingRequests } = useGetFriendShipsRequestQuery(user.id)
+  
+  console.log(requestsFriendShip)
 
   const filteredPeople = useMemo(() => {
     const list = Array.isArray(friendsFromApi) ? friendsFromApi : friendsFromApi?.friends ?? []
@@ -40,13 +43,22 @@ export default function Peoples() {
         <header>
           <div>
             <h4>People</h4>
-            <button
-              type="button"
-              onClick={handleOpenModal}
-              aria-label="Add new person"
-            >
-              <UserRoundPlus size={18} />
-            </button>
+            <span>
+              <button
+                type="button"
+                onClick={handleOpenModal}
+                aria-label="Add new person"
+              >
+                <UserLockIcon size={18} />
+              </button>
+              <button
+                type="button"
+                onClick={handleOpenModal}
+                aria-label="Add new person"
+              >
+                <UserRoundPlus size={18} />
+              </button>
+            </span>
             <ModalPeople
               isOpen={isModalOpen}
               onClose={handleCloseModal}

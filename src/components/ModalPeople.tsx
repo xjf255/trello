@@ -1,4 +1,3 @@
-import { UserRoundPlus } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { toast } from "sonner"
 import { useSendFriendshipRequestMutation } from "../context/people/friendlyAPI"
@@ -10,7 +9,7 @@ interface ModalPeopleProps {
 }
 
 export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
-  const [sendRequest, { isLoading, isSuccess, isError }] = useSendFriendshipRequestMutation()
+  const [sendRequest, { isLoading, isSuccess}] = useSendFriendshipRequestMutation()
   const [email, setEmail] = useState("")
   const dialogRef = useRef<HTMLDialogElement>(null)
   const { user } = useUserActions()
@@ -45,14 +44,13 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
     if (!email.trim()) return
 
     try {
-      await sendRequest({ addressee: email.trim(), requesterId: user.id })
+      await sendRequest({ addressee: email.trim(), requesterId: user.id }).unwrap()
       setEmail("")
-    } catch (error) {
-      console.error("Failed to add person:", error)
-      const errorMessage = typeof error === "object" && error !== null && "message" in error
-        ? (error as { message?: string }).message
-        : undefined;
-      toast.error(errorMessage || "Failed to add person")
+    } catch {
+      toast.error("No se envio la solicitud")
+    }
+    finally{
+      onClose()
     }
   }
 
@@ -100,7 +98,6 @@ export const ModalPeople = ({ isOpen, onClose }: ModalPeopleProps) => {
             disabled={isLoading || !email.trim()}
             className="submit-button"
           >
-            <UserRoundPlus size={18} />
             {isLoading ? "Enviando..." : isSuccess ? "Enviada ✅" : "Agregar amigo"}
           </button>
         </div>

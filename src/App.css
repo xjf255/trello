@@ -274,8 +274,6 @@ textarea {
 }
 
 @media (width > 376px) and (width < 1000px) {
-  body {}
-
   .plans__list {
     flex-direction: column;
     gap: 30px;
