@@ -6,6 +6,7 @@ import { useUserActions } from "../hooks/useUserActions"
 import { useGetFriendshipsQuery, useGetFriendShipsRequestQuery } from "../context/people/friendlyAPI"
 import { ItemUser } from "../components/ItemUser"
 import { IPeopleState } from "../types"
+import { Loader } from "../components/Loader"
 
 export default function Peoples() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -86,6 +87,7 @@ export default function Peoples() {
             ))}
         </ul>
       </div>
+      <Loader />
     </section>
   )
 }

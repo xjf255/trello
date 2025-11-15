@@ -1,0 +1,14 @@
+.dark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderContainer{
+  width: 200px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}

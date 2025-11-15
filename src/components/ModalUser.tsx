@@ -4,6 +4,7 @@ import '../styles/Modal.css'
 export const ModalUser = () => {
   return createPortal(
     <div className="dark">
+      <h2>prueba</h2>
       <section className="modal-friendly-user">
         <header className="modal-friendly__header">
           <h2>User Details</h2>

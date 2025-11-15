@@ -20,6 +20,19 @@ body {
   background-color: hsl(0, 0%, 100%);
 }
 
+.dark {
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: #00000082;
+
+  &>section {
+    background-color: hsl(0, 0%, 100%);
+  }
+}
+
 input {
   background-color: hsl(0, 0%, 100%);
 }
@@ -277,7 +290,7 @@ textarea {
   .plans__list {
     flex-direction: column;
     gap: 30px;
-  } 
+  }
 
   .contact {
     flex-direction: column;
