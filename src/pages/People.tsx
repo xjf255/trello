@@ -14,7 +14,7 @@ export default function Peoples() {
   const { user } = useUserActions()
   const { data: friendsFromApi = [], isLoading } = useGetFriendshipsQuery(user.id)
   const { data: requestsFriendShip, isLoading: isLoadingRequests } = useGetFriendShipsRequestQuery(user.id)
-  
+
   console.log(requestsFriendShip)
 
   const filteredPeople = useMemo(() => {

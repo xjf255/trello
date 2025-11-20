@@ -8,6 +8,7 @@ export const Loader = () => {
       <section className="loaderContainer">
         <ThreeDots 
           visible
+          color="#000"
           height="80"
           width="80"
         />
