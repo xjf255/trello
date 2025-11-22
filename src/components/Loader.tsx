@@ -6,12 +6,13 @@ export const Loader = () => {
   return createPortal(
     <div className="dark">
       <section className="loaderContainer">
-        <ThreeDots 
+        <ThreeDots
           visible
           color="#000"
-          height="80"
+          height="50"
           width="80"
         />
+        <strong className="loader__text">Loading...</strong>
       </section>
     </div>
     , document.body

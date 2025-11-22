@@ -97,3 +97,37 @@ form {
     }
   }
 }
+
+.people__list-wrapper {
+  position: relative;
+  min-height: 120px;
+  /* para que no cambie tanto la altura */
+}
+
+.people__loader,
+.people__loader-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.people__loader-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(4px);
+  animation: fadeInList 0.2s ease-out forwards;
+}
+
+@keyframes fadeInList {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
