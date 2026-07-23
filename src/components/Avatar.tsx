@@ -9,8 +9,8 @@ export default function Avatar() {
     navigate(URL)
   }
   return (
-    <figure onClick={() => changePage(PATHS.user.settings)}
-      style={{cursor: "pointer", width: "50px", height: "50px"}}>
+    <figure onClick={() => changePage(PATHS.user.workerspace.settings)}
+      style={{ cursor: "pointer", width: "50px", height: "50px" }}>
       {user?.avatar && <img className="user__avatar" src={user.avatar as string} alt={user.user || "User"} />}
     </figure>
   )

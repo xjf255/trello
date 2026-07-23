@@ -14,6 +14,7 @@ export const PATHS = {
   user: {
     profile: '/profile',
     workerspace: {
+      settings: '/settings',
       dashboard: '/dashboard',
       documents: "/documents",
       calendar: '/calendar',
