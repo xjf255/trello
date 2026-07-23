@@ -15,5 +15,13 @@ export const store = configureStore({
     getDefaultMiddleware().concat(friendlyAPI.middleware)
 })
 
+store.subscribe(() => {
+  try {
+    localStorage.setItem("trello_boards", JSON.stringify(store.getState().board))
+  } catch (error) {
+    console.error("Failed to save boards to localStorage:", error)
+  }
+})
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

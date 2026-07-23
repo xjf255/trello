@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Provider } from 'react-redux'
 import { store } from './context/store.ts'
 import React from 'react'
+import { setupMockFetch } from './utils/mockFetch.ts'
+
+setupMockFetch()
+
 
 const queryClient = new QueryClient()
 

@@ -7,9 +7,10 @@ interface Props {
   typesAccepted: string
   customLoader?: boolean
   customFnUpload?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onFileSelect?: (file: File) => void
 }
 
-export const InputFile = forwardRef<HTMLInputElement, Props>(({ name, typesAccepted, customLoader = false, customFnUpload }: Props, ref) => {
+export const InputFile = forwardRef<HTMLInputElement, Props>(({ name, typesAccepted, customLoader = false, customFnUpload, onFileSelect }: Props, ref) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
     const [fileName, setFileName] = useState<string | null>(null)
 
@@ -29,7 +30,11 @@ export const InputFile = forwardRef<HTMLInputElement, Props>(({ name, typesAccep
         return
       }
 
-      setFileName(fileInput.files[0].name)
+      const file = fileInput.files[0]
+      setFileName(file.name)
+      if (onFileSelect) {
+        onFileSelect(file)
+      }
     }
 
     const handleRemoveFile = () => {

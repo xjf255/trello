@@ -1,18 +1,21 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { PATHS } from "../../utils/constant"
-import { Calendar1, ChevronsLeft, CircleUserRound, FileText, LayoutDashboard, Users } from "lucide-react"
+import { Calendar1, ChevronsLeft, CircleUserRound, FileText, LayoutDashboard, Settings as SettingsIcon, Users } from "lucide-react"
 import { useUserActions } from "../../hooks/useUserActions"
 import "../../styles/Aside.css"
 
 export default function Aside() {
   const { user } = useUserActions()
+  const navigate = useNavigate()
 
   const iconsTop = [
     { name: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { name: "Documents", icon: <FileText size={18} /> },
     { name: "Calendar", icon: <Calendar1 size={18} /> },
     { name: "People", icon: <Users size={18} /> },
+    { name: "Settings", icon: <SettingsIcon size={18} /> },
   ]
+
 
   const listFooter = [
     { name: user.user, icon: <CircleUserRound />, path: PATHS.user.profile },
@@ -67,7 +70,7 @@ export default function Aside() {
       <footer className="aside__footer">
         <ul>
           <li className="get--pro">
-            <button>Get Pro</button>
+            <button onClick={() => navigate(PATHS.user.workerspace.settings)}>Get Pro</button>
           </li>
           {listFooter.map((item, index) => {
             return (

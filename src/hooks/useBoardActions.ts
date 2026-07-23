@@ -43,5 +43,16 @@ export const useBoardActions = () => {
     }
   }
 
-  return { board, createNewBoard, removeBoards, addComment, toggleLike, changeStatus }
+  const attachFile = (boardId: Id, fileName: string) => {
+    const currentBoard = getBoard(boardId)
+    if (currentBoard) {
+      const updatedBoard = {
+        ...currentBoard,
+        files: [...(currentBoard.files || []), fileName]
+      }
+      dispatch(updateBoard(updatedBoard))
+    }
+  }
+
+  return { board, createNewBoard, removeBoards, addComment, toggleLike, changeStatus, attachFile }
 }

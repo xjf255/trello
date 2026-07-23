@@ -71,6 +71,7 @@ export interface ICreateBoard {
 export interface IBoard extends ICreateBoard {
   likes: Id[]
   comments: IComment[]
+  files?: string[]
 }
 
 export interface IBoardWithId extends IBoard {

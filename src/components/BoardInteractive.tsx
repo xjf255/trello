@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const BoardInteractive = forwardRef<HTMLInputElement, Props>(({ boardItem, user }, ref) => {
-  const { addComment, toggleLike } = useBoardActions()
+  const { addComment, toggleLike, attachFile } = useBoardActions()
   const [showComments, setShowComments] = useState(false)
 
   const handleAddComment = (e: React.KeyboardEvent<HTMLTextAreaElement>, boardId: Id) => {
@@ -37,9 +37,23 @@ export const BoardInteractive = forwardRef<HTMLInputElement, Props>(({ boardItem
     }
   }
 
+  const handleFileSelect = (file: File) => {
+    attachFile(boardItem.id, file.name)
+  }
+
   return (
     <footer>
-      <InputFile name='file' typesAccepted='*' customLoader ref={ref} />
+      <InputFile name='file' typesAccepted='*' customLoader ref={ref} onFileSelect={handleFileSelect} />
+      {boardItem.files && boardItem.files.length > 0 && (
+        <div className="board__item--files" style={{ padding: "0.25rem 0.5rem", fontSize: "0.85rem", color: "#666", display: "flex", flexDirection: "column", gap: "2px" }}>
+          {boardItem.files.map((file, idx) => (
+            <div key={idx} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <span>📎</span>
+              <span>{file}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div>
         <textarea name="newComment" placeholder='add comment...' onKeyDown={(e) => handleAddComment(e, boardItem.id)} />
         <div>

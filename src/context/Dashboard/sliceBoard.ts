@@ -3,7 +3,16 @@ import { IBoardState, IBoardWithId, ICreateBoard, Id } from "../../types";
 import { BoardStatus } from "../../type";
 
 
-const initialState: IBoardState = []
+const initialState: IBoardState = (() => {
+  try {
+    const persisted = localStorage.getItem("trello_boards")
+    return persisted ? JSON.parse(persisted) : []
+  } catch (error) {
+    console.error("Failed to load boards from localStorage:", error)
+    return []
+  }
+})()
+
 
 const dashboardSlice = createSlice({
   name: "dashboard",

@@ -21,6 +21,8 @@ const FactorAuthentication = lazy(() => import('./verification/components/Factor
 const ProtectedRoutes = lazy(() => import('./components/ProtectedRoutes'))
 const Documents = lazy(() => import('./pages/Documents'))
 const Peoples = lazy(() => import('./pages/People'))
+const Settings = lazy(() => import('./components/Settings'))
+
 
 
 export default function App() {
@@ -79,6 +81,7 @@ export default function App() {
             <Route path={PATHS.user.workerspace.documents} element={<Documents />} />
             <Route path={PATHS.user.workerspace.documents+"/:documentId"} element={<Document />} />
             <Route path={PATHS.user.profile} element={<Profile />} />
+            <Route path={PATHS.user.workerspace.settings} element={<Settings />} />
           </Route>
           <Route path={PATHS.all} element={<NotFound />} />
         </Routes>
